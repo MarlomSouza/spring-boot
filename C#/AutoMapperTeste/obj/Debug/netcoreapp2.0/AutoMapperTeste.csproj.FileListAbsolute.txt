@@ -1,0 +1,11 @@
+D:\Projetos\C#\AutoMapperTeste\bin\Debug\netcoreapp2.0\AutoMapperTeste.deps.json
+D:\Projetos\C#\AutoMapperTeste\bin\Debug\netcoreapp2.0\AutoMapperTeste.runtimeconfig.json
+D:\Projetos\C#\AutoMapperTeste\bin\Debug\netcoreapp2.0\AutoMapperTeste.runtimeconfig.dev.json
+D:\Projetos\C#\AutoMapperTeste\bin\Debug\netcoreapp2.0\AutoMapperTeste.dll
+D:\Projetos\C#\AutoMapperTeste\bin\Debug\netcoreapp2.0\AutoMapperTeste.pdb
+D:\Projetos\C#\AutoMapperTeste\obj\Debug\netcoreapp2.0\AutoMapperTeste.csprojAssemblyReference.cache
+D:\Projetos\C#\AutoMapperTeste\obj\Debug\netcoreapp2.0\AutoMapperTeste.csproj.CoreCompileInputs.cache
+D:\Projetos\C#\AutoMapperTeste\obj\Debug\netcoreapp2.0\AutoMapperTeste.AssemblyInfoInputs.cache
+D:\Projetos\C#\AutoMapperTeste\obj\Debug\netcoreapp2.0\AutoMapperTeste.AssemblyInfo.cs
+D:\Projetos\C#\AutoMapperTeste\obj\Debug\netcoreapp2.0\AutoMapperTeste.dll
+D:\Projetos\C#\AutoMapperTeste\obj\Debug\netcoreapp2.0\AutoMapperTeste.pdb

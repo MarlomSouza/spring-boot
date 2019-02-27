@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  dell:
+    image: ${DOCKER_REGISTRY}dell
+    build:
+      context: .
+      dockerfile: Dell/Dockerfile

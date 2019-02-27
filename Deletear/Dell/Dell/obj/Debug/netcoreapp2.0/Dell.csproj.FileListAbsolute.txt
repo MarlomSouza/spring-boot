@@ -1,0 +1,11 @@
+D:\Projetos\Deletear\Dell\Dell\bin\Debug\netcoreapp2.0\Dell.deps.json
+D:\Projetos\Deletear\Dell\Dell\bin\Debug\netcoreapp2.0\Dell.runtimeconfig.json
+D:\Projetos\Deletear\Dell\Dell\bin\Debug\netcoreapp2.0\Dell.runtimeconfig.dev.json
+D:\Projetos\Deletear\Dell\Dell\bin\Debug\netcoreapp2.0\Dell.dll
+D:\Projetos\Deletear\Dell\Dell\bin\Debug\netcoreapp2.0\Dell.pdb
+D:\Projetos\Deletear\Dell\Dell\obj\Debug\netcoreapp2.0\Dell.csprojAssemblyReference.cache
+D:\Projetos\Deletear\Dell\Dell\obj\Debug\netcoreapp2.0\Dell.csproj.CoreCompileInputs.cache
+D:\Projetos\Deletear\Dell\Dell\obj\Debug\netcoreapp2.0\Dell.AssemblyInfoInputs.cache
+D:\Projetos\Deletear\Dell\Dell\obj\Debug\netcoreapp2.0\Dell.AssemblyInfo.cs
+D:\Projetos\Deletear\Dell\Dell\obj\Debug\netcoreapp2.0\Dell.dll
+D:\Projetos\Deletear\Dell\Dell\obj\Debug\netcoreapp2.0\Dell.pdb

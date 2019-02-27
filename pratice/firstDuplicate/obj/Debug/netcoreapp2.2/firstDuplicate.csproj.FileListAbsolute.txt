@@ -1,0 +1,11 @@
+D:\Projetos\pratice\firstDuplicate\bin\Debug\netcoreapp2.2\firstDuplicate.deps.json
+D:\Projetos\pratice\firstDuplicate\bin\Debug\netcoreapp2.2\firstDuplicate.runtimeconfig.json
+D:\Projetos\pratice\firstDuplicate\bin\Debug\netcoreapp2.2\firstDuplicate.runtimeconfig.dev.json
+D:\Projetos\pratice\firstDuplicate\bin\Debug\netcoreapp2.2\firstDuplicate.dll
+D:\Projetos\pratice\firstDuplicate\bin\Debug\netcoreapp2.2\firstDuplicate.pdb
+D:\Projetos\pratice\firstDuplicate\obj\Debug\netcoreapp2.2\firstDuplicate.csprojAssemblyReference.cache
+D:\Projetos\pratice\firstDuplicate\obj\Debug\netcoreapp2.2\firstDuplicate.csproj.CoreCompileInputs.cache
+D:\Projetos\pratice\firstDuplicate\obj\Debug\netcoreapp2.2\firstDuplicate.AssemblyInfoInputs.cache
+D:\Projetos\pratice\firstDuplicate\obj\Debug\netcoreapp2.2\firstDuplicate.AssemblyInfo.cs
+D:\Projetos\pratice\firstDuplicate\obj\Debug\netcoreapp2.2\firstDuplicate.dll
+D:\Projetos\pratice\firstDuplicate\obj\Debug\netcoreapp2.2\firstDuplicate.pdb
