@@ -1,2 +1,0 @@
-user_1	Matthew Rathbone	Dallas, TX
-user_2	Joe Bloggs	London, England
