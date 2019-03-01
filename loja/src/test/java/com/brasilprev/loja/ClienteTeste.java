@@ -9,6 +9,8 @@ import com.brasilprev.loja.dominio.entidade.clientes.Endereco;
 import com.brasilprev.loja.dominio.excecao.ExcecaoDeDominio;
 
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
+import org.junit.Before;
+import org.junit.Test;
 
 public class ClienteTeste {
 

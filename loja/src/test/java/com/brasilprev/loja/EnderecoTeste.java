@@ -6,7 +6,7 @@ import static org.junit.Assert.assertEquals;
 import com.brasilprev.loja.dominio.entidade.clientes.Endereco;
 import com.brasilprev.loja.dominio.excecao.ExcecaoDeDominio;
 
-import org.aspectj.lang.annotation.Before;
+import org.junit.Before;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.Test;
 
