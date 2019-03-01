@@ -1,8 +1,10 @@
-package com.loja.entidade;
+package com.loja.entidade.produtos;
 
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
+import com.loja.entidade.Entidade;
+import com.loja.entidade.clientes.Cliente;
 import com.loja.excecao.ExcecaoDeDominio;
 
 public class Pedido extends Entidade {
@@ -13,7 +15,7 @@ public class Pedido extends Entidade {
     private UUID sessao;
 
     public Pedido(Cliente cliente) {
-        ExcecaoDeDominio.Validar(cliente == null, "Cliente inválido");
+        ExcecaoDeDominio.Quando(cliente == null, "Cliente inválido");
 
         this.cliente = cliente;
         this.statusPedido = StatusPedido.ABERTO;

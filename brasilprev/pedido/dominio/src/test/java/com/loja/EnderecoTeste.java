@@ -3,7 +3,7 @@ package com.loja;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.Assert.assertEquals;
 
-import com.loja.entidade.Endereco;
+import com.loja.entidade.clientes.Endereco;
 import com.loja.excecao.ExcecaoDeDominio;
 
 import org.junit.Before;

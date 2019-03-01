@@ -12,7 +12,7 @@ public class ExcecaoDeDominio extends RuntimeException{
         super(mensagem);
     }
 
-    public static void Validar(Boolean haErro, String mensagemDeErro){
+    public static void Quando(Boolean haErro, String mensagemDeErro){
         if(haErro)
             throw new ExcecaoDeDominio(mensagemDeErro);
     }

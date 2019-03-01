@@ -1,5 +1,6 @@
-package com.loja.entidade;
+package com.loja.entidade.clientes;
 
+import com.loja.entidade.Entidade;
 import com.loja.excecao.ExcecaoDeDominio;
 
 public class Endereco extends Entidade{
@@ -24,11 +25,11 @@ public class Endereco extends Entidade{
     }
 
     private static void validar(String rua, String bairro, String cep, String cidade, String estado) {
-        ExcecaoDeDominio.Validar(rua == null || rua.trim().isEmpty(), "Nome da rua é inválido");
-        ExcecaoDeDominio.Validar(bairro == null || bairro.trim().isEmpty(), "Nome do bairro é inválido");
-        ExcecaoDeDominio.Validar(cep == null || cep.trim().isEmpty(), "Número do cep é inválido");
-        ExcecaoDeDominio.Validar(cidade == null || cidade.trim().isEmpty(), "Nome da cidade é inválido");
-        ExcecaoDeDominio.Validar(estado == null || estado.trim().isEmpty(), "Nome do estado é inválido");
+        ExcecaoDeDominio.Quando(rua == null || rua.trim().isEmpty(), "Nome da rua é inválido");
+        ExcecaoDeDominio.Quando(bairro == null || bairro.trim().isEmpty(), "Nome do bairro é inválido");
+        ExcecaoDeDominio.Quando(cep == null || cep.trim().isEmpty(), "Número do cep é inválido");
+        ExcecaoDeDominio.Quando(cidade == null || cidade.trim().isEmpty(), "Nome da cidade é inválido");
+        ExcecaoDeDominio.Quando(estado == null || estado.trim().isEmpty(), "Nome do estado é inválido");
     }
 
     /**

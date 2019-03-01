@@ -8,9 +8,9 @@ import static org.mockito.Mockito.mock;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 
-import com.loja.entidade.Cliente;
-import com.loja.entidade.Pedido;
-import com.loja.entidade.StatusPedido;
+import com.loja.entidade.clientes.Cliente;
+import com.loja.entidade.produtos.Pedido;
+import com.loja.entidade.produtos.StatusPedido;
 import com.loja.excecao.ExcecaoDeDominio;
 
 import org.junit.Before;
@@ -18,7 +18,6 @@ import org.junit.Test;
 
 public class PedidoTeste {
 
-    private ZonedDateTime data;
     private Cliente cliente;
 
     @Before

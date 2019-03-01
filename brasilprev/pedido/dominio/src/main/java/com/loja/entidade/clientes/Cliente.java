@@ -1,5 +1,6 @@
-package com.loja.entidade;
+package com.loja.entidade.clientes;
 
+import com.loja.entidade.Entidade;
 import com.loja.excecao.ExcecaoDeDominio;
 
 public class Cliente extends Entidade {
@@ -18,12 +19,12 @@ public class Cliente extends Entidade {
     }
 
     private static void validar(String nome, String email, String senha, Endereco endereco) {
-        ExcecaoDeDominio.Validar(nome == null || nome.trim().isEmpty(), "Nome é inválido");
-        ExcecaoDeDominio.Validar(email == null || email.trim().isEmpty(), "Email é inválido");
-        ExcecaoDeDominio.Validar(senha == null || senha.trim().isEmpty(), "Senha é inválida");
-        ExcecaoDeDominio.Validar(senha == null || senha.trim().length() < 6,
+        ExcecaoDeDominio.Quando(nome == null || nome.trim().isEmpty(), "Nome é inválido");
+        ExcecaoDeDominio.Quando(email == null || email.trim().isEmpty(), "Email é inválido");
+        ExcecaoDeDominio.Quando(senha == null || senha.trim().isEmpty(), "Senha é inválida");
+        ExcecaoDeDominio.Quando(senha == null || senha.trim().length() < 6,
                 "Senha é muito curta, é necessário ter 6 ou mais caracteres");
-        ExcecaoDeDominio.Validar(endereco == null, "Endereço é inválido");
+        ExcecaoDeDominio.Quando(endereco == null, "Endereço é inválido");
     }
 
     public String getNome() {

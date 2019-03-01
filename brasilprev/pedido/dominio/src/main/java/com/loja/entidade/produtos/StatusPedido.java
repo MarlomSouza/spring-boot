@@ -1,4 +1,4 @@
-package com.loja.entidade;
+package com.loja.entidade.produtos;
 
 /**
  * StatusPedido

@@ -4,8 +4,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
-import com.loja.entidade.Cliente;
-import com.loja.entidade.Endereco;
+import com.loja.entidade.clientes.Cliente;
+import com.loja.entidade.clientes.Endereco;
 import com.loja.excecao.ExcecaoDeDominio;
 
 import org.junit.Before;
