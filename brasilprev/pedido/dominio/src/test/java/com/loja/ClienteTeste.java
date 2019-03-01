@@ -19,7 +19,7 @@ public class ClienteTeste {
     private Endereco endereco;
 
     @Before
-    public void Init() {
+    public void SetUp() {
         nome = "marlom";
         email = "marlom@gmail.com";
         senha = "senha.123";

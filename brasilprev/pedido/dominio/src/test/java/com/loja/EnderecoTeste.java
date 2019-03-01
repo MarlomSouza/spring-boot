@@ -9,9 +9,6 @@ import com.loja.excecao.ExcecaoDeDominio;
 import org.junit.Before;
 import org.junit.Test;
 
-/**
- * EnderecoTeste
- */
 public class EnderecoTeste {
 
     private String rua;

@@ -1,21 +1,9 @@
 package com.loja.entidade;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 import com.loja.excecao.ExcecaoDeDominio;
 
-/**
- * Endereco
- */
-@Entity
-public class Endereco {
+public class Endereco extends Entidade{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String rua;
     private String cidade;
     private String bairro;

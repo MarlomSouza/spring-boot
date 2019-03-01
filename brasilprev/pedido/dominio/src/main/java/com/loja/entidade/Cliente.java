@@ -2,15 +2,15 @@ package com.loja.entidade;
 
 import com.loja.excecao.ExcecaoDeDominio;
 
-public class Cliente {
-    public String nome;
-    public String email;
-    public String senha;
+public class Cliente extends Entidade {
+
+    private String nome;
+    private String email;
+    private String senha;
     private Endereco endereco;
 
     public Cliente(String nome, String email, String senha, Endereco endereco) {
         validar(nome, email, senha, endereco);
-
         this.nome = nome;
         this.email = email;
         this.senha = senha;

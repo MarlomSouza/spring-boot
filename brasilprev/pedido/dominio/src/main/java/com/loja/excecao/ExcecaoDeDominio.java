@@ -1,11 +1,11 @@
 package com.loja.excecao;
 
-import java.util.ArrayList;
-
 /**
  * ExcecaoDeDominio
  */
 public class ExcecaoDeDominio extends RuntimeException{
+
+    private static final long serialVersionUID = 1L;
 
     ExcecaoDeDominio(String mensagem)
     {
