@@ -6,6 +6,7 @@ import static org.junit.Assert.assertEquals;
 import com.loja.entidade.clientes.Endereco;
 import com.loja.excecao.ExcecaoDeDominio;
 
+import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -28,7 +29,6 @@ public class EnderecoTeste {
 
     @Test
     public void deve_criar_endereco() {
-
         Endereco endereco = new Endereco(rua, bairro, cep, cidade, estado);
 
         assertEquals(rua, endereco.getRua());
@@ -42,90 +42,109 @@ public class EnderecoTeste {
     public void nao_deve_criar_com_rua_invalida() {
         rua = null;
 
-        assertThatThrownBy(() -> {
+        ThrowingCallable act = () -> {
             new Endereco(rua, bairro, cep, cidade, estado);
-        }).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Nome da rua é inválido");
+        };
+
+        assertThatThrownBy(act).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Nome da rua é inválido");
     }
 
     @Test
     public void nao_deve_criar_com_rua_vazia() {
         rua = " ";
 
-        assertThatThrownBy(() -> {
+        ThrowingCallable act = () -> {
             new Endereco(rua, bairro, cep, cidade, estado);
-        }).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Nome da rua é inválido");
+        };
+
+        assertThatThrownBy(act).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Nome da rua é inválido");
     }
 
     @Test
     public void nao_deve_criar_com_cidade_invalida() {
         cidade = null;
 
-        assertThatThrownBy(() -> {
+        ThrowingCallable act = () -> {
             new Endereco(rua, bairro, cep, cidade, estado);
-        }).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Nome da cidade é inválido");
+        };
+
+        assertThatThrownBy(act).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Nome da cidade é inválido");
     }
 
     @Test
     public void nao_deve_criar_com_cidade_vazia() {
         cidade = " ";
 
-        assertThatThrownBy(() -> {
+        ThrowingCallable act = () -> {
             new Endereco(rua, bairro, cep, cidade, estado);
-        }).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Nome da cidade é inválido");
+        };
+
+        assertThatThrownBy(act).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Nome da cidade é inválido");
     }
 
     @Test
     public void nao_deve_criar_com_bairro_invalido() {
         bairro = null;
 
-        assertThatThrownBy(() -> {
+        ThrowingCallable act = () -> {
             new Endereco(rua, bairro, cep, cidade, estado);
-        }).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Nome do bairro é inválido");
+        };
+
+        assertThatThrownBy(act).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Nome do bairro é inválido");
     }
 
     @Test
     public void nao_deve_criar_com_bairro_vazio() {
         bairro = " ";
 
-        assertThatThrownBy(() -> {
+        ThrowingCallable act = () -> {
             new Endereco(rua, bairro, cep, cidade, estado);
-        }).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Nome do bairro é inválido");
+        };
+
+        assertThatThrownBy(act).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Nome do bairro é inválido");
     }
 
     @Test
     public void nao_deve_criar_com_cep_invalido() {
         cep = null;
 
-        assertThatThrownBy(() -> {
+        ThrowingCallable act = () -> {
             new Endereco(rua, bairro, cep, cidade, estado);
-        }).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Número do cep é inválido");
+        };
+
+        assertThatThrownBy(act).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Número do cep é inválido");
     }
 
     @Test
     public void nao_deve_criar_com_cep_vazio() {
         cep = " ";
 
-        assertThatThrownBy(() -> {
+        ThrowingCallable act = () -> {
             new Endereco(rua, bairro, cep, cidade, estado);
-        }).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Número do cep é inválido");
+        };
+
+        assertThatThrownBy(act).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Número do cep é inválido");
     }
 
     @Test
     public void nao_deve_criar_com_estado_invalido() {
         estado = null;
 
-        assertThatThrownBy(() -> {
+        ThrowingCallable act = () -> {
             new Endereco(rua, bairro, cep, cidade, estado);
-        }).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Nome do estado é inválido");
+        };
+
+        assertThatThrownBy(act).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Nome do estado é inválido");
     }
 
     @Test
     public void nao_deve_criar_com_estado_vazio() {
         estado = " ";
 
-        assertThatThrownBy(() -> {
+        ThrowingCallable act = () -> {
             new Endereco(rua, bairro, cep, cidade, estado);
-        }).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Nome do estado é inválido");
-    }
+        };
 
+        assertThatThrownBy(act).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Nome do estado é inválido");
+    }
 }

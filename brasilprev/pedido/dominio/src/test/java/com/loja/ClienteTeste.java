@@ -8,6 +8,7 @@ import com.loja.entidade.clientes.Cliente;
 import com.loja.entidade.clientes.Endereco;
 import com.loja.excecao.ExcecaoDeDominio;
 
+import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,7 +20,7 @@ public class ClienteTeste {
     private Endereco endereco;
 
     @Before
-    public void SetUp() {
+    public void setUp() {
         nome = "marlom";
         email = "marlom@gmail.com";
         senha = "senha.123";
@@ -41,63 +42,77 @@ public class ClienteTeste {
     public void nao_deve_criar_com_nome_invalido() {
         nome = " ";
 
-        assertThatThrownBy(() -> {
+        ThrowingCallable act = () -> {
             new Cliente(nome, email, senha, endereco);
-        }).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Nome é inválido");
+        };
+
+        assertThatThrownBy(act).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Nome é inválido");
     }
 
     @Test
     public void nao_deve_criar_com_nome_vazio() {
         nome = null;
 
-        assertThatThrownBy(() -> {
+        ThrowingCallable act = () -> {
             new Cliente(nome, email, senha, endereco);
-        }).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Nome é inválido");
+        };
+
+        assertThatThrownBy(act).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Nome é inválido");
     }
 
     @Test
     public void nao_deve_criar_com_email_nulo() {
         email = null;
 
-        assertThatThrownBy(() -> {
+        ThrowingCallable act = () -> {
             new Cliente(nome, email, senha, endereco);
-        }).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Email é inválido");
+        };
+
+        assertThatThrownBy(act).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Email é inválido");
     }
 
     @Test
     public void nao_deve_criar_com_email_vazio() {
         email = " ";
 
-        assertThatThrownBy(() -> {
+        ThrowingCallable act = () -> {
             new Cliente(nome, email, senha, endereco);
-        }).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Email é inválido");
+        };
+
+        assertThatThrownBy(act).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Email é inválido");
     }
 
     @Test
     public void nao_deve_criar_com_senha_invalida() {
         senha = null;
 
-        assertThatThrownBy(() -> {
+        ThrowingCallable act = () -> {
             new Cliente(nome, email, senha, endereco);
-        }).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Senha é inválida");
+        };
+
+        assertThatThrownBy(act).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Senha é inválida");
     }
 
     @Test
     public void nao_deve_criar_com_senha_vazia() {
         senha = null;
 
-        assertThatThrownBy(() -> {
+        ThrowingCallable act = () -> {
             new Cliente(nome, email, senha, endereco);
-        }).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Senha é inválida");
+        };
+
+        assertThatThrownBy(act).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Senha é inválida");
     }
 
     @Test
     public void nao_deve_criar_com_senha_curta() {
         senha = "123";
 
-        assertThatThrownBy(() -> {
+        ThrowingCallable act = () -> {
             new Cliente(nome, email, senha, endereco);
-        }).isInstanceOf(ExcecaoDeDominio.class)
+        };
+
+        assertThatThrownBy(act).isInstanceOf(ExcecaoDeDominio.class)
                 .hasMessageContaining("Senha é muito curta, é necessário ter 6 ou mais caracteres");
     }
 
@@ -105,8 +120,10 @@ public class ClienteTeste {
     public void nao_deve_criar_com_endereco_invalido() {
         endereco = null;
 
-        assertThatThrownBy(() -> {
+        ThrowingCallable act = () -> {
             new Cliente(nome, email, senha, endereco);
-        }).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Endereço é inválido");
+        };
+
+        assertThatThrownBy(act).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Endereço é inválido");
     }
 }

@@ -6,6 +6,7 @@ import static org.junit.Assert.assertEquals;
 import com.loja.entidade.produtos.Categoria;
 import com.loja.excecao.ExcecaoDeDominio;
 
+import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.Test;
 
 public class CategoriaTeste {
@@ -21,15 +22,19 @@ public class CategoriaTeste {
 
     @Test
     public void nao_deve_criar_com_nome_invalido() {
-        assertThatThrownBy(() -> {
+        ThrowingCallable act = () -> {
             new Categoria(" ");
-        }).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Nome é inválido");
+        };
+
+        assertThatThrownBy(act).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Nome é inválido");
     }
 
     @Test
     public void nao_deve_criar_com_nome_vazio() {
-        assertThatThrownBy(() -> {
+        ThrowingCallable act = () -> {
             new Categoria(null);
-        }).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Nome é inválido");
+        };
+
+        assertThatThrownBy(act).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Nome é inválido");
     }
 }

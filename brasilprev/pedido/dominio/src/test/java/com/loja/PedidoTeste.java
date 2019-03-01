@@ -9,10 +9,11 @@ import java.time.LocalDate;
 import java.time.ZonedDateTime;
 
 import com.loja.entidade.clientes.Cliente;
-import com.loja.entidade.produtos.Pedido;
-import com.loja.entidade.produtos.StatusPedido;
+import com.loja.entidade.compras.Pedido;
+import com.loja.entidade.compras.StatusPedido;
 import com.loja.excecao.ExcecaoDeDominio;
 
+import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,16 +22,16 @@ public class PedidoTeste {
     private Cliente cliente;
 
     @Before
-    public void SetUp() {
+    public void setUp() {
         cliente = mock(Cliente.class);
-
     }
 
     @Test
     public void deve_criar() {
-        Pedido pedido = new Pedido(cliente);
         LocalDate dataEsperada = ZonedDateTime.now().toLocalDate();
         StatusPedido statusEsperado = StatusPedido.ABERTO;
+
+        Pedido pedido = new Pedido(cliente);
 
         assertEquals(cliente, pedido.getCliente());
         assertEquals(dataEsperada, pedido.getDataPedido().toLocalDate());
@@ -40,9 +41,11 @@ public class PedidoTeste {
 
     @Test
     public void nao_deve_criar_com_cliente_invalido() {
-        assertThatThrownBy(() -> {
+        ThrowingCallable act = () -> {
             new Pedido(null);
-        }).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Cliente inválido");
+        };
+
+        assertThatThrownBy(act).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Cliente inválido");
     }
 
     @Test

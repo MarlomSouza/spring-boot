@@ -1,4 +1,4 @@
-package com.loja.entidade.produtos;
+package com.loja.entidade.compras;
 
 import java.time.ZonedDateTime;
 import java.util.UUID;
