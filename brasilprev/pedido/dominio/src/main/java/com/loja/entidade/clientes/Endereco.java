@@ -3,16 +3,13 @@ package com.loja.entidade.clientes;
 import com.loja.entidade.Entidade;
 import com.loja.excecao.ExcecaoDeDominio;
 
-public class Endereco extends Entidade{
+public class Endereco extends Entidade {
 
     private String rua;
     private String cidade;
     private String bairro;
     private String cep;
     private String estado;
-
-    private Endereco() {
-    }
 
     public Endereco(String rua, String bairro, String cep, String cidade, String estado) {
         validar(rua, bairro, cep, cidade, estado);
