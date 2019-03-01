@@ -1,4 +1,4 @@
-package com.pedido;
+package com.loja;
 
 /**
  * Hello world!

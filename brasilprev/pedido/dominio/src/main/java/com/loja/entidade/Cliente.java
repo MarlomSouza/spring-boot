@@ -1,6 +1,6 @@
-package com.pedido.entidade;
+package com.loja.entidade;
 
-import com.pedido.excecao.ExcecaoDeDominio;
+import com.loja.excecao.ExcecaoDeDominio;
 
 public class Cliente {
     public String nome;

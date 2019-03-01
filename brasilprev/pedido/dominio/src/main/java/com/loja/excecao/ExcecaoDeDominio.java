@@ -1,4 +1,4 @@
-package com.pedido.excecao;
+package com.loja.excecao;
 
 import java.util.ArrayList;
 

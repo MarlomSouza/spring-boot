@@ -1,10 +1,10 @@
-package com.pedido;
+package com.loja;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.Assert.assertEquals;
 
-import com.pedido.entidade.Endereco;
-import com.pedido.excecao.ExcecaoDeDominio;
+import com.loja.entidade.Endereco;
+import com.loja.excecao.ExcecaoDeDominio;
 
 import org.junit.Before;
 import org.junit.Test;

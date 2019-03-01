@@ -1,11 +1,11 @@
-package com.pedido.entidade;
+package com.loja.entidade;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import com.pedido.excecao.ExcecaoDeDominio;
+import com.loja.excecao.ExcecaoDeDominio;
 
 /**
  * Endereco
