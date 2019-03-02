@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.brasilprev.loja.dominio.entidade.compras.Pedido;
-import com.brasilprev.loja.dominio.entidade.compras.PedidoItem;
+import com.brasilprev.loja.dominio.entidade.compras.ItemPedido;
 import com.brasilprev.loja.dominio.entidade.produtos.Produto;
 import com.brasilprev.loja.dominio.excecao.ExcecaoDeDominio;
 
@@ -17,7 +17,7 @@ import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.Before;
 import org.junit.Test;
 
-public class PedidoItemTeste {
+public class ItemPedidoTeste {
 
     private Pedido pedido;
     private Produto produto;
@@ -36,13 +36,13 @@ public class PedidoItemTeste {
         BigDecimal valor = new BigDecimal(100);
         when(produto.getPreco()).thenReturn(valor);
 
-        PedidoItem pedidoItem = new PedidoItem(pedido, produto, quantidade);
+        ItemPedido itemPedido = new ItemPedido(pedido, produto, quantidade);
 
-        assertEquals(pedido, pedidoItem.getPedido());
-        assertEquals(produto, pedidoItem.getProduto());
-        assertEquals(quantidade, pedidoItem.getQuantidade());
-        assertEquals(valor, pedidoItem.getValor());
-        assertEquals(subTotal, pedidoItem.getSubTotal());
+        assertEquals(pedido, itemPedido.getPedido());
+        assertEquals(produto, itemPedido.getProduto());
+        assertEquals(quantidade, itemPedido.getQuantidade());
+        assertEquals(valor, itemPedido.getValor());
+        assertEquals(subTotal, itemPedido.getSubTotal());
     }
 
     @Test
@@ -50,7 +50,7 @@ public class PedidoItemTeste {
         pedido = null;
 
         ThrowingCallable act = () -> {
-            new PedidoItem(pedido, produto, quantidade);
+            new ItemPedido(pedido, produto, quantidade);
         };
 
         assertThatThrownBy(act).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Pedido é inválido");
@@ -61,7 +61,7 @@ public class PedidoItemTeste {
         produto = null;
 
         ThrowingCallable act = () -> {
-            new PedidoItem(pedido, produto, quantidade);
+            new ItemPedido(pedido, produto, quantidade);
         };
 
         assertThatThrownBy(act).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Produto é inválido");
@@ -72,7 +72,7 @@ public class PedidoItemTeste {
         quantidade = 0;
 
         ThrowingCallable act = () -> {
-            new PedidoItem(pedido, produto, quantidade);
+            new ItemPedido(pedido, produto, quantidade);
         };
 
         assertThatThrownBy(act).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Quantidade é inválida");

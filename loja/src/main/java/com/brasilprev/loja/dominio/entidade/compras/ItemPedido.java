@@ -6,7 +6,7 @@ import com.brasilprev.loja.dominio.entidade.Entidade;
 import com.brasilprev.loja.dominio.entidade.produtos.Produto;
 import com.brasilprev.loja.dominio.excecao.ExcecaoDeDominio;
 
-public class PedidoItem extends Entidade {
+public class ItemPedido extends Entidade {
 
     private Pedido pedido;
     private Produto produto;
@@ -14,7 +14,7 @@ public class PedidoItem extends Entidade {
     private BigDecimal valor;
     private BigDecimal subTotal;
 
-    public PedidoItem(Pedido pedido, Produto produto, int quantidade) {
+    public ItemPedido(Pedido pedido, Produto produto, int quantidade) {
         validar(pedido, produto, quantidade);
 
         this.pedido = pedido;
