@@ -15,12 +15,10 @@ import com.brasilprev.loja.dominio.entidade.clientes.Cliente;
 import com.brasilprev.loja.dominio.entidade.compras.ItemPedido;
 import com.brasilprev.loja.dominio.entidade.compras.Pedido;
 import com.brasilprev.loja.dominio.entidade.compras.StatusPedido;
-import com.brasilprev.loja.dominio.entidade.produtos.Categoria;
 import com.brasilprev.loja.dominio.entidade.produtos.Produto;
 import com.brasilprev.loja.dominio.excecao.ExcecaoDeDominio;
 
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
-import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
 import org.junit.Before;
 import org.junit.Test;
 

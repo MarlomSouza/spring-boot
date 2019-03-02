@@ -42,6 +42,7 @@ public class ProdutoTeste {
         assertEquals(foto, produto.getFoto());
         assertEquals(preco, produto.getPreco());
         assertEquals(quantidade, produto.getQuantidade());
+        assertEquals(categoria, produto.getCategoria());
     }
 
     @Test

@@ -2,13 +2,25 @@ package com.brasilprev.loja.dominio.entidade.compras;
 
 import java.math.BigDecimal;
 
-import com.brasilprev.loja.dominio.entidade.Entidade;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
 import com.brasilprev.loja.dominio.entidade.produtos.Produto;
 import com.brasilprev.loja.dominio.excecao.ExcecaoDeDominio;
 
-public class ItemPedido extends Entidade {
+@Entity
+public class ItemPedido {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @OneToOne
     private Pedido pedido;
+    @OneToOne
     private Produto produto;
     private int quantidade;
     private BigDecimal valor;

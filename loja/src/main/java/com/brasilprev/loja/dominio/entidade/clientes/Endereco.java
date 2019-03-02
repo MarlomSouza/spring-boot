@@ -1,9 +1,11 @@
 package com.brasilprev.loja.dominio.entidade.clientes;
 
-import com.brasilprev.loja.dominio.entidade.Entidade;
+import javax.persistence.Embeddable;
+
 import com.brasilprev.loja.dominio.excecao.ExcecaoDeDominio;
 
-public class Endereco extends Entidade {
+@Embeddable
+public class Endereco {
 
     private String rua;
     private String cidade;

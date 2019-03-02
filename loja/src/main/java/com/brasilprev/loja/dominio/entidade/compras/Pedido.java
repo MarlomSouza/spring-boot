@@ -5,19 +5,29 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import javax.persistence.ManyToOne;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
-import com.brasilprev.loja.dominio.entidade.Entidade;
 import com.brasilprev.loja.dominio.entidade.clientes.Cliente;
 import com.brasilprev.loja.dominio.excecao.ExcecaoDeDominio;
 
-public class Pedido extends Entidade {
+@Entity
+public class Pedido {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @OneToOne
     private Cliente cliente;
     private StatusPedido statusPedido;
     private ZonedDateTime dataPedido;
     private UUID sessao;
-    @ManyToOne
+    @OneToMany(cascade = CascadeType.ALL)
     private List<ItemPedido> itenspedido;
 
     public Pedido(Cliente cliente) {

@@ -4,5 +4,5 @@ import com.brasilprev.loja.dominio.entidade.produtos.Categoria;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CategoriasRepositorio extends JpaRepository<Categoria, Long> {
+public interface CategoriaRepositorio extends JpaRepository<Categoria, Long> {
 }

@@ -2,18 +2,27 @@ package com.brasilprev.loja.dominio.entidade.produtos;
 
 import java.math.BigDecimal;
 
-import com.brasilprev.loja.dominio.entidade.Entidade;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
 import com.brasilprev.loja.dominio.excecao.ExcecaoDeDominio;
 
+@Entity
+public class Produto {
 
-
-public class Produto extends Entidade {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     private String nome;
     private String descricao;
     private String foto;
     private BigDecimal preco;
     private int quantidade;
+    @OneToOne
+    private Categoria categoria;
 
     public Produto(String nome, String descricao, String foto, BigDecimal preco, int quantidade, Categoria categoria) {
         validar(nome, descricao, foto, preco, quantidade, categoria);
@@ -23,6 +32,7 @@ public class Produto extends Entidade {
         this.foto = foto;
         this.preco = preco;
         this.quantidade = quantidade;
+        this.categoria = categoria;
     }
 
     private static void validar(String nome, String descricao, String foto, BigDecimal preco, int quantidade,
@@ -53,6 +63,10 @@ public class Produto extends Entidade {
 
     public int getQuantidade() {
         return quantidade;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
     }
 
     public void removerQuantidade(int quantidade) {
