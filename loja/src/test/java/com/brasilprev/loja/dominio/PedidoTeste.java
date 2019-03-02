@@ -1,4 +1,4 @@
-package com.brasilprev.loja;
+package com.brasilprev.loja.dominio;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.Assert.assertEquals;

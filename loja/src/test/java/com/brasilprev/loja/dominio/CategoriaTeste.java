@@ -1,4 +1,4 @@
-package com.brasilprev.loja;
+package com.brasilprev.loja.dominio;
 
 import com.brasilprev.loja.dominio.entidade.produtos.Categoria;
 import com.brasilprev.loja.dominio.excecao.ExcecaoDeDominio;
