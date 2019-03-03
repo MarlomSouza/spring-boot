@@ -27,6 +27,7 @@ public class CriarPedidoTeste {
     private PedidoDto pedidoDto;
     private ClienteRepositorio clienteRepositorio;
     private ProdutoRepositorio produtoRepositorio;
+    private ItemPedidoDto itemPedidoDto;
 
     @Before
     public void setUp() {
@@ -35,9 +36,12 @@ public class CriarPedidoTeste {
         produtoRepositorio = mock(ProdutoRepositorio.class);
         criarPedido = new CriarPedidoImpl(pedidoRepositorio, clienteRepositorio, produtoRepositorio);
         pedidoDto = new PedidoDto();
+        itemPedidoDto = mock(ItemPedidoDto.class);
         pedidoDto.clienteId = 1;
-        pedidoDto.produtoId = 1;
-        pedidoDto.quantidade = 3;
+        itemPedidoDto.produtoId = 1;
+        itemPedidoDto.quantidade = 3;
+        pedidoDto.itensPedido = new ItemPedidoDto[] { itemPedidoDto };
+
     }
 
     @Test
@@ -46,7 +50,7 @@ public class CriarPedidoTeste {
         Produto produto = mock(Produto.class);
         when(produto.getPreco()).thenReturn(BigDecimal.TEN);
         when(clienteRepositorio.findById(pedidoDto.clienteId)).thenReturn(Optional.of(cliente));
-        when(produtoRepositorio.findById(pedidoDto.produtoId)).thenReturn(Optional.of(produto));
+        when(produtoRepositorio.findById(itemPedidoDto.produtoId)).thenReturn(Optional.of(produto));
 
         Pedido pedido = criarPedido.criar(pedidoDto);
 
@@ -95,11 +99,12 @@ public class CriarPedidoTeste {
         Produto produto = mock(Produto.class);
         Pedido pedido = new Pedido(cliente);
         pedidoDto.pedidoId = 15;
+
         when(clienteRepositorio.findById(pedidoDto.clienteId)).thenReturn(Optional.of(cliente));
         when(pedidoRepositorio.findById(pedidoDto.pedidoId)).thenReturn(Optional.of(pedido));
-        when(produtoRepositorio.findById(pedidoDto.produtoId)).thenReturn(Optional.of(produto));
+        when(produtoRepositorio.findById(itemPedidoDto.produtoId)).thenReturn(Optional.of(produto));
         when(produto.getPreco()).thenReturn(BigDecimal.TEN);
-    
+
         Pedido pedidoAtualizado = criarPedido.criar(pedidoDto);
 
         verify(pedidoRepositorio).save(pedidoAtualizado);

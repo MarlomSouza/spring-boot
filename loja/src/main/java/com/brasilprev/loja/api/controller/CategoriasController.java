@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("api/categorias")
+@RequestMapping(CategoriasController.API_CATEGORIAS)
 public class CategoriasController {
 
-    private final String apiPath = "api/categorias/";
+    static final String API_CATEGORIAS = "api/categorias/";
     private CriarCategoria criarCategoria;
     private CategoriaRepositorio categoriaRepositorio;
 
@@ -33,7 +33,7 @@ public class CategoriasController {
     @PostMapping
     public ResponseEntity<?> post(CategoriaDto categoriaDto) {
         Categoria categoria = criarCategoria.criar(categoriaDto);
-        URI path = URI.create(apiPath + categoria.getId());
+        URI path = URI.create(API_CATEGORIAS + categoria.getId());
         return ResponseEntity.created(path).build();
     }
 
@@ -46,5 +46,4 @@ public class CategoriasController {
     public ResponseEntity<Categoria> get(@PathVariable long id) {
         return ResponseEntity.of(categoriaRepositorio.findById(id));
     }
-
 }

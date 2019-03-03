@@ -40,6 +40,10 @@ public class Pedido {
         this.itenspedido = new ArrayList<ItemPedido>();
     }
 
+    public long getId() {
+        return id;
+    }
+
     public Cliente getCliente() {
         return cliente;
     }

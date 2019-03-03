@@ -25,7 +25,7 @@ public class CategoriasControllerTeste {
 
     @Spy
     private List<Categoria> categorias = new ArrayList<Categoria>();
-    private CategoriasController categoriaController;
+    private CategoriasController categoriasController;
     private CategoriaRepositorio categoriaRepositorio;
     private CriarCategoria criarCategoria;
 
@@ -33,7 +33,7 @@ public class CategoriasControllerTeste {
     public void setUp() {
         criarCategoria = mock(CriarCategoria.class);
         categoriaRepositorio = mock(CategoriaRepositorio.class);
-        categoriaController = new CategoriasController(categoriaRepositorio, criarCategoria);
+        categoriasController = new CategoriasController(categoriaRepositorio, criarCategoria);
     }
 
     @Test
@@ -45,7 +45,7 @@ public class CategoriasControllerTeste {
         when(categoria.getId()).thenReturn(categoriaId);
         when(criarCategoria.criar(categoriaDto)).thenReturn(categoria);
 
-        ResponseEntity<?> response = categoriaController.post(categoriaDto);
+        ResponseEntity<?> response = categoriasController.post(categoriaDto);
 
         assertEquals(localizacaoCriado, response.getHeaders().getLocation().getPath());
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
@@ -55,7 +55,7 @@ public class CategoriasControllerTeste {
     public void deve_obter_todas() {
         when(categoriaRepositorio.findAll()).thenReturn(categorias);
 
-        ResponseEntity<List<Categoria>> response = categoriaController.get();
+        ResponseEntity<List<Categoria>> response = categoriasController.get();
 
         assertEquals(categorias, response.getBody());
     }
@@ -66,7 +66,7 @@ public class CategoriasControllerTeste {
         Categoria categoria = mock(Categoria.class);
         when(categoriaRepositorio.findById(categoriaId)).thenReturn(Optional.of(categoria));
 
-        ResponseEntity<Categoria> response = categoriaController.get(categoriaId);
+        ResponseEntity<Categoria> response = categoriasController.get(categoriaId);
 
         assertEquals(categoria, response.getBody());
     }
@@ -75,7 +75,7 @@ public class CategoriasControllerTeste {
     public void deve_retornar_nao_encontrado() {
         final long categoriaId = 0;
 
-        ResponseEntity<Categoria> response = categoriaController.get(categoriaId);
+        ResponseEntity<Categoria> response = categoriasController.get(categoriaId);
 
         assertNull(response.getBody());
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());

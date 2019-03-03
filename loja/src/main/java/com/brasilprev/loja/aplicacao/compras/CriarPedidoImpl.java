@@ -30,16 +30,22 @@ public class CriarPedidoImpl implements CriarPedido {
     @Override
     public Pedido criar(PedidoDto pedidoDto) {
         Pedido pedido = obterPedido(pedidoDto);
-
-        Produto produto = produtoRepositorio.findById(pedidoDto.produtoId).orElse(null);
-
-        ExcecaoDeAplicacao.Quando(produto == null, "Produto não foi encontrado");
-
-        ItemPedido itemPedido = new ItemPedido(pedido, produto, pedidoDto.quantidade);
-        pedido.adicionarItemPedido(itemPedido);
-
+        adicionarItemPedido(pedido, pedidoDto.itensPedido);
         pedidoRepositorio.save(pedido);
         return pedido;
+    }
+
+    private void adicionarItemPedido(Pedido pedido, ItemPedidoDto[] itensPedido) {
+        for (ItemPedidoDto itemPedidoDto : itensPedido) {
+
+            Produto produto = produtoRepositorio.findById(itemPedidoDto.produtoId).orElse(null);
+
+            ExcecaoDeAplicacao.Quando(produto == null, "Produto não foi encontrado");
+
+            ItemPedido itemPedido = new ItemPedido(pedido, produto, itemPedidoDto.quantidade);
+            pedido.adicionarItemPedido(itemPedido);
+        }
+
     }
 
     private Pedido obterPedido(PedidoDto pedidoDto) {
