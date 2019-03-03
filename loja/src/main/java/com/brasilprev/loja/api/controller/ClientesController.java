@@ -3,8 +3,6 @@ package com.brasilprev.loja.api.controller;
 import java.net.URI;
 import java.util.List;
 
-import javax.tools.DocumentationTool.Location;
-
 import com.brasilprev.loja.aplicacao.clientes.ClienteDto;
 import com.brasilprev.loja.aplicacao.clientes.comando.CriarCliente;
 import com.brasilprev.loja.dominio.entidade.clientes.Cliente;
@@ -15,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -38,11 +37,10 @@ public class ClientesController {
 
     @GetMapping("{id}")
     public ResponseEntity<Cliente> get(@PathVariable("id") long id) {
-        Cliente cliente = clienteRepositorio.findById(id).orElse(null);
-
-        return ResponseEntity.ok(cliente);
+        return ResponseEntity.of(clienteRepositorio.findById(id));
     }
 
+    @PostMapping
     public ResponseEntity<Cliente> post(ClienteDto clienteDto) {
         Cliente cliente = criaCliente.criar(clienteDto);
         URI path = URI.create(apiPath + cliente.getId());

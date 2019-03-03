@@ -1,6 +1,7 @@
 package com.brasilprev.loja.api;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -12,13 +13,13 @@ import java.util.Optional;
 import com.brasilprev.loja.api.controller.ClientesController;
 import com.brasilprev.loja.aplicacao.clientes.ClienteDto;
 import com.brasilprev.loja.aplicacao.clientes.comando.CriarCliente;
-import com.brasilprev.loja.aplicacao.clientes.comando.CriarClienteImpl;
 import com.brasilprev.loja.dominio.entidade.clientes.Cliente;
 import com.brasilprev.loja.repositorio.ClienteRepositorio;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Spy;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 public class ClientesControllerTeste {
@@ -39,7 +40,7 @@ public class ClientesControllerTeste {
     }
 
     @Test
-    public void deve_obter() {
+    public void deve_obter_todos() {
         when(clienteRepositorio.findAll()).thenReturn(clientes);
 
         ResponseEntity<List<Cliente>> response = clientesController.get();
@@ -69,5 +70,15 @@ public class ClientesControllerTeste {
 
         verify(criarCliente).criar(clienteDto);
         assertEquals(localizacaoClienteCriado, response.getHeaders().getLocation().getPath());
+    }
+
+    @Test
+    public void deve_retornar_nao_encontrado() {
+        final long clienteId = 0;
+
+        ResponseEntity<Cliente> response = clientesController.get(clienteId);
+
+        assertNull(response.getBody());
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 }
