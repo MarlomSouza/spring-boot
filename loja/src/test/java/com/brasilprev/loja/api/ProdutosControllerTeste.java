@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.brasilprev.loja.api.controller.ProdutosController;
-import com.brasilprev.loja.aplicacao.produtos.CriarProduto;
+import com.brasilprev.loja.aplicacao.produtos.CriadorDeProduto;
 import com.brasilprev.loja.aplicacao.produtos.ProdutoDto;
 import com.brasilprev.loja.dominio.entidade.produtos.Produto;
 import com.brasilprev.loja.repositorio.ProdutoRepositorio;
@@ -24,7 +24,7 @@ public class ProdutosControllerTeste {
 
     private final List<Produto> produtos = new ArrayList<Produto>();
     private ProdutoRepositorio produtoRepositorio;
-    private CriarProduto criarProdutos;
+    private CriadorDeProduto criarProdutos;
     private ProdutosController produtosController;
     private Produto produto;
 
@@ -32,7 +32,7 @@ public class ProdutosControllerTeste {
     public void setUp() {
         produto = mock(Produto.class);
         produtoRepositorio = mock(ProdutoRepositorio.class);
-        criarProdutos = mock(CriarProduto.class);
+        criarProdutos = mock(CriadorDeProduto.class);
         produtosController = new ProdutosController(produtoRepositorio, criarProdutos);
     }
 

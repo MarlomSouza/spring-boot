@@ -4,7 +4,7 @@ import java.net.URI;
 import java.util.List;
 
 import com.brasilprev.loja.aplicacao.produtos.CategoriaDto;
-import com.brasilprev.loja.aplicacao.produtos.CriarCategoria;
+import com.brasilprev.loja.aplicacao.produtos.CriadorDeCategoria;
 import com.brasilprev.loja.dominio.entidade.produtos.Categoria;
 import com.brasilprev.loja.repositorio.CategoriaRepositorio;
 
@@ -21,18 +21,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CategoriasController {
 
     static final String API_CATEGORIAS = "api/categorias/";
-    private CriarCategoria criarCategoria;
+    private CriadorDeCategoria criadorDeCategoria;
     private CategoriaRepositorio categoriaRepositorio;
 
     @Autowired
-    public CategoriasController(CategoriaRepositorio categoriaRepositorio, CriarCategoria criarCategoria) {
+    public CategoriasController(CategoriaRepositorio categoriaRepositorio, CriadorDeCategoria criadorDeCategoria) {
         this.categoriaRepositorio = categoriaRepositorio;
-        this.criarCategoria = criarCategoria;
+        this.criadorDeCategoria = criadorDeCategoria;
     }
 
     @PostMapping
     public ResponseEntity<?> post(CategoriaDto categoriaDto) {
-        Categoria categoria = criarCategoria.criar(categoriaDto);
+        Categoria categoria = criadorDeCategoria.criar(categoriaDto);
         URI path = URI.create(API_CATEGORIAS + categoria.getId());
         return ResponseEntity.created(path).build();
     }

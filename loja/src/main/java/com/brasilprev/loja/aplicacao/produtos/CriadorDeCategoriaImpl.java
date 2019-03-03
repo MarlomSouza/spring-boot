@@ -3,12 +3,16 @@ package com.brasilprev.loja.aplicacao.produtos;
 import com.brasilprev.loja.dominio.entidade.produtos.Categoria;
 import com.brasilprev.loja.repositorio.CategoriaRepositorio;
 
-public class CriarCategoriaImpl implements CriarCategoria {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class CriadorDeCategoriaImpl implements CriadorDeCategoria {
 
     private CategoriaRepositorio categoriaRepositorio;
 
-    public CriarCategoriaImpl(CategoriaRepositorio categoriaRepositorio) {
-        super();
+    @Autowired
+    public CriadorDeCategoriaImpl(CategoriaRepositorio categoriaRepositorio) {
         this.categoriaRepositorio = categoriaRepositorio;
     }
 
@@ -18,5 +22,4 @@ public class CriarCategoriaImpl implements CriarCategoria {
         categoriaRepositorio.save(categoria);
         return categoria;
     }
-
 }

@@ -22,7 +22,7 @@ public class CriarProdutoTeste {
 
     private ProdutoDto produtoDto;
     private CategoriaRepositorio categoriaRepositprio;
-    private CriarProdutoImpl criarProduto;
+    private CriadorDeProduto criarProduto;
     private ProdutoRepositorio produtoRepositorio;
 
     @Before
@@ -36,7 +36,7 @@ public class CriarProdutoTeste {
         produtoDto.categoriaId = 1;
         categoriaRepositprio = mock(CategoriaRepositorio.class);
         produtoRepositorio = mock(ProdutoRepositorio.class);
-        criarProduto = new CriarProdutoImpl(produtoRepositorio, categoriaRepositprio);
+        criarProduto = new CriadorDeProdutoImpl(produtoRepositorio, categoriaRepositprio);
     }
 
     @Test

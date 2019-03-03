@@ -13,14 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CriarPedidoImpl implements CriarPedido {
+public class CriadorDePedidoImpl implements CriadorDePedido {
 
     private PedidoRepositorio pedidoRepositorio;
     private ClienteRepositorio clienteRepositorio;
     private ProdutoRepositorio produtoRepositorio;
 
     @Autowired
-    public CriarPedidoImpl(PedidoRepositorio pedidoRepositorio, ClienteRepositorio clienteRepositorio,
+    public CriadorDePedidoImpl(PedidoRepositorio pedidoRepositorio, ClienteRepositorio clienteRepositorio,
             ProdutoRepositorio produtoRepositorio) {
         this.pedidoRepositorio = pedidoRepositorio;
         this.clienteRepositorio = clienteRepositorio;

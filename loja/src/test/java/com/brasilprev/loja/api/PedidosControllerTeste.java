@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.brasilprev.loja.api.controller.PedidosController;
-import com.brasilprev.loja.aplicacao.compras.CriarPedido;
+import com.brasilprev.loja.aplicacao.compras.CriadorDePedido;
 import com.brasilprev.loja.aplicacao.compras.PedidoDto;
 import com.brasilprev.loja.dominio.entidade.compras.Pedido;
 import com.brasilprev.loja.repositorio.PedidoRepositorio;
@@ -28,15 +28,15 @@ public class PedidosControllerTeste {
     @Spy
     private List<Pedido> pedidos = new ArrayList<Pedido>();
     private PedidoRepositorio pedidoRepositorio;
-    private CriarPedido criarPedido;
+    private CriadorDePedido criadorDePedido;
     private PedidosController pedidosController;
     private Pedido pedido;
 
     @Before
     public void setUp() {
         pedidoRepositorio = mock(PedidoRepositorio.class);
-        criarPedido = mock(CriarPedido.class);
-        pedidosController = new PedidosController(pedidoRepositorio, criarPedido);
+        criadorDePedido = mock(CriadorDePedido.class);
+        pedidosController = new PedidosController(pedidoRepositorio, criadorDePedido);
         pedido = mock(Pedido.class);
     }
 
@@ -46,7 +46,7 @@ public class PedidosControllerTeste {
         final String localizacaoCriado = "api/pedidos/" + pedidoId;
 
         PedidoDto pedidoDto = mock(PedidoDto.class);
-        when(criarPedido.criar(pedidoDto)).thenReturn(pedido);
+        when(criadorDePedido.criar(pedidoDto)).thenReturn(pedido);
         when(pedido.getId()).thenReturn(pedidoId);
 
         ResponseEntity<Pedido> response = pedidosController.post(pedidoDto);
@@ -89,11 +89,11 @@ public class PedidosControllerTeste {
     public void deve_adicionar_item_pedido_a_um_pedido() {
         final long pedidoId = 2;
         final PedidoDto pedidoDto = mock(PedidoDto.class);
-        when(criarPedido.criar(pedidoDto)).thenReturn(pedido);
+        when(criadorDePedido.criar(pedidoDto)).thenReturn(pedido);
 
         ResponseEntity<Pedido> response = pedidosController.put(pedidoId, pedidoDto);
 
-        verify(criarPedido).criar(pedidoDto);
+        verify(criadorDePedido).criar(pedidoDto);
         assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }
 

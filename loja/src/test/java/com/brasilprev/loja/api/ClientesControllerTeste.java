@@ -12,7 +12,7 @@ import java.util.Optional;
 
 import com.brasilprev.loja.api.controller.ClientesController;
 import com.brasilprev.loja.aplicacao.clientes.ClienteDto;
-import com.brasilprev.loja.aplicacao.clientes.comando.CriarCliente;
+import com.brasilprev.loja.aplicacao.clientes.CriadorDeCliente;
 import com.brasilprev.loja.dominio.entidade.clientes.Cliente;
 import com.brasilprev.loja.repositorio.ClienteRepositorio;
 
@@ -28,14 +28,14 @@ public class ClientesControllerTeste {
     private List<Cliente> clientes = new ArrayList<Cliente>();
     private ClientesController clientesController;
     private ClienteRepositorio clienteRepositorio;
-    private CriarCliente criarCliente;
+    private CriadorDeCliente criadorDeCliente;
     private Cliente cliente;
 
     @Before
     public void setUp() {
         clienteRepositorio = mock(ClienteRepositorio.class);
-        criarCliente = mock(CriarCliente.class);
-        clientesController = new ClientesController(clienteRepositorio, criarCliente);
+        criadorDeCliente = mock(CriadorDeCliente.class);
+        clientesController = new ClientesController(clienteRepositorio, criadorDeCliente);
         cliente = mock(Cliente.class);
     }
 
@@ -64,11 +64,11 @@ public class ClientesControllerTeste {
         final String localizacaoClienteCriado = "api/clientes/" + clienteId;
         ClienteDto clienteDto = mock(ClienteDto.class);
         when(cliente.getId()).thenReturn(clienteId);
-        when(criarCliente.criar(clienteDto)).thenReturn(cliente);
+        when(criadorDeCliente.criar(clienteDto)).thenReturn(cliente);
 
         ResponseEntity<Cliente> response = clientesController.post(clienteDto);
 
-        verify(criarCliente).criar(clienteDto);
+        verify(criadorDeCliente).criar(clienteDto);
         assertEquals(localizacaoClienteCriado, response.getHeaders().getLocation().getPath());
     }
 

@@ -10,13 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CriarProdutoImpl implements CriarProduto {
+public class CriadorDeProdutoImpl implements CriadorDeProduto {
 
     private ProdutoRepositorio produtoRepositorio;
     private CategoriaRepositorio categoriaRepositorio;
 
     @Autowired
-    public CriarProdutoImpl(ProdutoRepositorio produtoRepositorio, CategoriaRepositorio categoriaRepositorio) {
+    public CriadorDeProdutoImpl(ProdutoRepositorio produtoRepositorio, CategoriaRepositorio categoriaRepositorio) {
         this.produtoRepositorio = produtoRepositorio;
         this.categoriaRepositorio = categoriaRepositorio;
     }

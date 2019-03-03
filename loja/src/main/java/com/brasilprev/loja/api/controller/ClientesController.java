@@ -4,7 +4,7 @@ import java.net.URI;
 import java.util.List;
 
 import com.brasilprev.loja.aplicacao.clientes.ClienteDto;
-import com.brasilprev.loja.aplicacao.clientes.comando.CriarCliente;
+import com.brasilprev.loja.aplicacao.clientes.CriadorDeCliente;
 import com.brasilprev.loja.dominio.entidade.clientes.Cliente;
 import com.brasilprev.loja.repositorio.ClienteRepositorio;
 
@@ -17,20 +17,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("api/clientes")
+@RequestMapping(ClientesController.API_PATH)
 public class ClientesController {
 
+    static final String API_PATH = "api/clientes/";
     private ClienteRepositorio clienteRepositorio;
-    private CriarCliente criaCliente;
-    private final String apiPath = "api/clientes/";
+    private CriadorDeCliente criadorDeCliente;
 
     @Autowired
-    public ClientesController(ClienteRepositorio clienteRepositorio, CriarCliente criarCliente) {
+    public ClientesController(ClienteRepositorio clienteRepositorio, CriadorDeCliente criadorDeCliente) {
         this.clienteRepositorio = clienteRepositorio;
-        this.criaCliente = criarCliente;
+        this.criadorDeCliente = criadorDeCliente;
     }
 
-    @GetMapping("/")
+    @GetMapping()
     public ResponseEntity<List<Cliente>> get() {
         return ResponseEntity.ok(clienteRepositorio.findAll());
     }
@@ -42,8 +42,8 @@ public class ClientesController {
 
     @PostMapping
     public ResponseEntity<Cliente> post(ClienteDto clienteDto) {
-        Cliente cliente = criaCliente.criar(clienteDto);
-        URI path = URI.create(apiPath + cliente.getId());
+        Cliente cliente = criadorDeCliente.criar(clienteDto);
+        URI path = URI.create(API_PATH + cliente.getId());
         return ResponseEntity.created(path).build();
     }
 }

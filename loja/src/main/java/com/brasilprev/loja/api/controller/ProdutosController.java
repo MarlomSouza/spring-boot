@@ -3,7 +3,7 @@ package com.brasilprev.loja.api.controller;
 import java.net.URI;
 import java.util.List;
 
-import com.brasilprev.loja.aplicacao.produtos.CriarProduto;
+import com.brasilprev.loja.aplicacao.produtos.CriadorDeProduto;
 import com.brasilprev.loja.aplicacao.produtos.ProdutoDto;
 import com.brasilprev.loja.dominio.entidade.produtos.Produto;
 import com.brasilprev.loja.repositorio.ProdutoRepositorio;
@@ -17,27 +17,27 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("api/produtos")
+@RequestMapping(ProdutosController.API_PATH)
 public class ProdutosController {
 
-    private CriarProduto criarProdutos;
+    private CriadorDeProduto criadorDeProduto;
     private ProdutoRepositorio produtoRepositorio;
-    private final String apiPath = "api/produtos/";
+    static final String API_PATH = "api/produtos/";
 
     @Autowired
-    public ProdutosController(ProdutoRepositorio produtoRepositorio, CriarProduto criarProdutos) {
+    public ProdutosController(ProdutoRepositorio produtoRepositorio, CriadorDeProduto criadorDeProduto) {
         this.produtoRepositorio = produtoRepositorio;
-        this.criarProdutos = criarProdutos;
+        this.criadorDeProduto = criadorDeProduto;
     }
 
     @PostMapping
     public ResponseEntity<Produto> post(ProdutoDto produtoDto) {
-        Produto produto = criarProdutos.criar(produtoDto);
-        URI path = URI.create(apiPath + produto.getId());
+        Produto produto = criadorDeProduto.criar(produtoDto);
+        URI path = URI.create(API_PATH + produto.getId());
         return ResponseEntity.created(path).build();
     }
 
-    @GetMapping("/")
+    @GetMapping()
     public ResponseEntity<List<Produto>> get() {
         return ResponseEntity.ok(produtoRepositorio.findAll());
     }

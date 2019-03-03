@@ -3,7 +3,7 @@ package com.brasilprev.loja.api.controller;
 import java.net.URI;
 import java.util.List;
 
-import com.brasilprev.loja.aplicacao.compras.CriarPedido;
+import com.brasilprev.loja.aplicacao.compras.CriadorDePedido;
 import com.brasilprev.loja.aplicacao.compras.PedidoDto;
 import com.brasilprev.loja.dominio.entidade.compras.Pedido;
 import com.brasilprev.loja.repositorio.PedidoRepositorio;
@@ -18,24 +18,23 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(PedidosController.API_PEDIDOS)
+@RequestMapping(PedidosController.API_PATH)
 public class PedidosController {
 
-    static final String API_PEDIDOS = "api/pedidos/";
-
+    static final String API_PATH = "api/pedidos/";
     private PedidoRepositorio pedidoRepositorio;
-    private CriarPedido criarPedido;
+    private CriadorDePedido criadorDePedido;
 
     @Autowired
-    public PedidosController(PedidoRepositorio pedidoRepositorio, CriarPedido criarPedido) {
+    public PedidosController(PedidoRepositorio pedidoRepositorio, CriadorDePedido criadorDePedido) {
         this.pedidoRepositorio = pedidoRepositorio;
-        this.criarPedido = criarPedido;
+        this.criadorDePedido = criadorDePedido;
     }
 
     @PostMapping
     public ResponseEntity<Pedido> post(PedidoDto pedidoDto) {
-        Pedido pedido = criarPedido.criar(pedidoDto);
-        URI uri = URI.create(API_PEDIDOS + pedido.getId());
+        Pedido pedido = criadorDePedido.criar(pedidoDto);
+        URI uri = URI.create(API_PATH + pedido.getId());
         return ResponseEntity.created(uri).build();
     }
 
@@ -49,10 +48,10 @@ public class PedidosController {
         return ResponseEntity.of(pedidoRepositorio.findById(id));
     }
 
-    @PutMapping(PedidosController.API_PEDIDOS + "{id}/adicionarItem")
+    @PutMapping(PedidosController.API_PATH + "{id}/adicionarItem")
     public ResponseEntity<Pedido> put(@PathVariable long id, PedidoDto pedidoDto) {
         pedidoDto.pedidoId = id;
-        criarPedido.criar(pedidoDto);
+        criadorDePedido.criar(pedidoDto);
         return ResponseEntity.noContent().build();
     }
 }

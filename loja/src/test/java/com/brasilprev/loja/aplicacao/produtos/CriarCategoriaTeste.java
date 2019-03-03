@@ -13,11 +13,11 @@ public class CriarCategoriaTeste {
     @Test
     public void deve_criar() {
         CategoriaRepositorio repositorio = mock(CategoriaRepositorio.class);
-        CriarCategoria criarCategoria = new CriarCategoriaImpl(repositorio);
+        CriadorDeCategoria criadorDeCategoria = new CriadorDeCategoriaImpl(repositorio);
         CategoriaDto categoriaDto = new CategoriaDto();
         categoriaDto.nome = "Limpeza";
 
-        Categoria categoria = criarCategoria.criar(categoriaDto);
+        Categoria categoria = criadorDeCategoria.criar(categoriaDto);
 
         verify(repositorio).save(categoria);
     }

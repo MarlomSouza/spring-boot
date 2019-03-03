@@ -22,7 +22,7 @@ import org.junit.Test;
 
 public class CriarPedidoTeste {
 
-    private CriarPedidoImpl criarPedido;
+    private CriadorDePedido criadorDePedido;
     private PedidoRepositorio pedidoRepositorio;
     private PedidoDto pedidoDto;
     private ClienteRepositorio clienteRepositorio;
@@ -34,7 +34,7 @@ public class CriarPedidoTeste {
         pedidoRepositorio = mock(PedidoRepositorio.class);
         clienteRepositorio = mock(ClienteRepositorio.class);
         produtoRepositorio = mock(ProdutoRepositorio.class);
-        criarPedido = new CriarPedidoImpl(pedidoRepositorio, clienteRepositorio, produtoRepositorio);
+        criadorDePedido = new CriadorDePedidoImpl(pedidoRepositorio, clienteRepositorio, produtoRepositorio);
         pedidoDto = new PedidoDto();
         itemPedidoDto = mock(ItemPedidoDto.class);
         pedidoDto.clienteId = 1;
@@ -52,7 +52,7 @@ public class CriarPedidoTeste {
         when(clienteRepositorio.findById(pedidoDto.clienteId)).thenReturn(Optional.of(cliente));
         when(produtoRepositorio.findById(itemPedidoDto.produtoId)).thenReturn(Optional.of(produto));
 
-        Pedido pedido = criarPedido.criar(pedidoDto);
+        Pedido pedido = criadorDePedido.criar(pedidoDto);
 
         verify(pedidoRepositorio).save(pedido);
     }
@@ -60,7 +60,7 @@ public class CriarPedidoTeste {
     @Test
     public void deve_disparar_exececao_quando_nao_encontrar_cliente() {
         ThrowingCallable act = () -> {
-            criarPedido.criar(pedidoDto);
+            criadorDePedido.criar(pedidoDto);
         };
 
         assertThatThrownBy(act).isInstanceOf(ExcecaoDeAplicacao.class)
@@ -72,7 +72,7 @@ public class CriarPedidoTeste {
         Cliente cliente = mock(Cliente.class);
         when(clienteRepositorio.findById(pedidoDto.clienteId)).thenReturn(Optional.of(cliente));
         ThrowingCallable act = () -> {
-            criarPedido.criar(pedidoDto);
+            criadorDePedido.criar(pedidoDto);
         };
 
         assertThatThrownBy(act).isInstanceOf(ExcecaoDeAplicacao.class)
@@ -86,7 +86,7 @@ public class CriarPedidoTeste {
         when(clienteRepositorio.findById(pedidoDto.clienteId)).thenReturn(Optional.of(cliente));
 
         ThrowingCallable act = () -> {
-            criarPedido.criar(pedidoDto);
+            criadorDePedido.criar(pedidoDto);
         };
 
         assertThatThrownBy(act).isInstanceOf(ExcecaoDeAplicacao.class)
@@ -105,7 +105,7 @@ public class CriarPedidoTeste {
         when(produtoRepositorio.findById(itemPedidoDto.produtoId)).thenReturn(Optional.of(produto));
         when(produto.getPreco()).thenReturn(BigDecimal.TEN);
 
-        Pedido pedidoAtualizado = criarPedido.criar(pedidoDto);
+        Pedido pedidoAtualizado = criadorDePedido.criar(pedidoDto);
 
         verify(pedidoRepositorio).save(pedidoAtualizado);
     }

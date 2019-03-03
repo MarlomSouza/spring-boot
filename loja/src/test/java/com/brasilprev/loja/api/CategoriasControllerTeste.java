@@ -11,7 +11,7 @@ import java.util.Optional;
 
 import com.brasilprev.loja.api.controller.CategoriasController;
 import com.brasilprev.loja.aplicacao.produtos.CategoriaDto;
-import com.brasilprev.loja.aplicacao.produtos.CriarCategoria;
+import com.brasilprev.loja.aplicacao.produtos.CriadorDeCategoria;
 import com.brasilprev.loja.dominio.entidade.produtos.Categoria;
 import com.brasilprev.loja.repositorio.CategoriaRepositorio;
 
@@ -27,13 +27,13 @@ public class CategoriasControllerTeste {
     private List<Categoria> categorias = new ArrayList<Categoria>();
     private CategoriasController categoriasController;
     private CategoriaRepositorio categoriaRepositorio;
-    private CriarCategoria criarCategoria;
+    private CriadorDeCategoria criadorDeCategoria;
 
     @Before
     public void setUp() {
-        criarCategoria = mock(CriarCategoria.class);
+        criadorDeCategoria = mock(CriadorDeCategoria.class);
         categoriaRepositorio = mock(CategoriaRepositorio.class);
-        categoriasController = new CategoriasController(categoriaRepositorio, criarCategoria);
+        categoriasController = new CategoriasController(categoriaRepositorio, criadorDeCategoria);
     }
 
     @Test
@@ -43,7 +43,7 @@ public class CategoriasControllerTeste {
         Categoria categoria = mock(Categoria.class);
         CategoriaDto categoriaDto = mock(CategoriaDto.class);
         when(categoria.getId()).thenReturn(categoriaId);
-        when(criarCategoria.criar(categoriaDto)).thenReturn(categoria);
+        when(criadorDeCategoria.criar(categoriaDto)).thenReturn(categoria);
 
         ResponseEntity<?> response = categoriasController.post(categoriaDto);
 

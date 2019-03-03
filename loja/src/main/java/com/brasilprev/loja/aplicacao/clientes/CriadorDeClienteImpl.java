@@ -1,4 +1,4 @@
-package com.brasilprev.loja.aplicacao.clientes.comando;
+package com.brasilprev.loja.aplicacao.clientes;
 
 import com.brasilprev.loja.aplicacao.clientes.ClienteDto;
 import com.brasilprev.loja.aplicacao.clientes.MapeadorDeCliente;
@@ -6,14 +6,15 @@ import com.brasilprev.loja.dominio.entidade.clientes.Cliente;
 import com.brasilprev.loja.repositorio.ClienteRepositorio;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-public class CriarClienteImpl implements CriarCliente {
+@Service
+public class CriadorDeClienteImpl implements CriadorDeCliente {
 
     private ClienteRepositorio clienteRepositorio;
 
     @Autowired
-    public CriarClienteImpl(ClienteRepositorio clienteRepositorio) {
-        super();
+    public CriadorDeClienteImpl(ClienteRepositorio clienteRepositorio) {
         this.clienteRepositorio = clienteRepositorio;
     }
 

@@ -3,8 +3,6 @@ package com.brasilprev.loja.aplicacao.clientes;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-import com.brasilprev.loja.aplicacao.clientes.comando.CriarCliente;
-import com.brasilprev.loja.aplicacao.clientes.comando.CriarClienteImpl;
 import com.brasilprev.loja.dominio.entidade.clientes.Cliente;
 import com.brasilprev.loja.repositorio.ClienteRepositorio;
 
@@ -15,7 +13,7 @@ public class CriarClienteTeste {
     @Test
     public void deve_criar() {
         ClienteRepositorio repositorio = mock(ClienteRepositorio.class);
-        CriarCliente criarCliente = new CriarClienteImpl(repositorio);
+        CriadorDeCliente criadorDeCliente = new CriadorDeClienteImpl(repositorio);
         ClienteDto clienteDto = new ClienteDto();
         clienteDto.nome = "Marlom";
         clienteDto.email = "marlom@hotmai.com";
@@ -26,7 +24,7 @@ public class CriarClienteTeste {
         clienteDto.cidade = "Campo grande";
         clienteDto.estado = "ms";
 
-        Cliente cliente = criarCliente.criar(clienteDto);
+        Cliente cliente = criadorDeCliente.criar(clienteDto);
 
         verify(repositorio).save(cliente);
     }
