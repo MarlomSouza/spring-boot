@@ -45,6 +45,10 @@ public class Produto {
         ExcecaoDeDominio.Quando(categoria == null, "Categoria é inválida");
     }
 
+    public long getId() {
+        return id;
+    }
+
     public String getNome() {
         return nome;
     }

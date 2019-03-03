@@ -42,7 +42,7 @@ public class CategoriasControllerTeste {
     @Test
     public void deve_criar() {
         final long categoriaId = 4;
-        final String localizacaoCriado = "api/categorias/" + 4;
+        final String localizacaoCriado = "api/categorias/" + categoriaId;
         Categoria categoria = mock(Categoria.class);
         CategoriaDto categoriaDto = mock(CategoriaDto.class);
         when(categoria.getId()).thenReturn(categoriaId);
