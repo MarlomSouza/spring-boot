@@ -1,4 +1,4 @@
-package com.brasilprev.loja.web.seguranca;
+package com.brasilprev.loja.api.seguranca;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

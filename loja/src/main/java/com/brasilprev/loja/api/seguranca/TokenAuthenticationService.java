@@ -1,4 +1,4 @@
-package com.brasilprev.loja.web.seguranca;
+package com.brasilprev.loja.api.seguranca;
 
 import java.util.Collections;
 import java.util.Date;

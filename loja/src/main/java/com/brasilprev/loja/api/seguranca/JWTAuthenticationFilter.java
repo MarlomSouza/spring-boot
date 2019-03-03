@@ -1,4 +1,4 @@
-package com.brasilprev.loja.web.seguranca;
+package com.brasilprev.loja.api.seguranca;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

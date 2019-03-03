@@ -1,4 +1,4 @@
-package com.brasilprev.loja.web.seguranca;
+package com.brasilprev.loja.api.seguranca;
 
 import java.io.IOException;
 import java.util.Collections;
