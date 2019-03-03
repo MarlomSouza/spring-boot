@@ -8,7 +8,7 @@ import com.brasilprev.loja.repositorio.CategoriaRepositorio;
 
 import org.junit.Test;
 
-public class CriarCategoriaTeste {
+public class CriadorDeCategoriaTeste {
 
     @Test
     public void deve_criar() {

@@ -18,7 +18,7 @@ import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.Before;
 import org.junit.Test;
 
-public class CriarProdutoTeste {
+public class CriadorDeProdutoTeste {
 
     private ProdutoDto produtoDto;
     private CategoriaRepositorio categoriaRepositprio;

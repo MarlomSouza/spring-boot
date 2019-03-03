@@ -20,7 +20,7 @@ import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.Before;
 import org.junit.Test;
 
-public class CriarPedidoTeste {
+public class CriadorDePedidoTeste {
 
     private CriadorDePedido criadorDePedido;
     private PedidoRepositorio pedidoRepositorio;

@@ -8,7 +8,7 @@ import com.brasilprev.loja.repositorio.ClienteRepositorio;
 
 import org.junit.Test;
 
-public class CriarClienteTeste {
+public class CriadorDeClienteTeste {
 
     @Test
     public void deve_criar() {
