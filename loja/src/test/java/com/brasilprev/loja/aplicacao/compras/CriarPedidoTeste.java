@@ -1,7 +1,6 @@
 package com.brasilprev.loja.aplicacao.compras;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -11,7 +10,6 @@ import java.util.Optional;
 
 import com.brasilprev.loja.aplicacao.ExcecaoDeAplicacao;
 import com.brasilprev.loja.dominio.entidade.clientes.Cliente;
-import com.brasilprev.loja.dominio.entidade.compras.ItemPedido;
 import com.brasilprev.loja.dominio.entidade.compras.Pedido;
 import com.brasilprev.loja.dominio.entidade.produtos.Produto;
 import com.brasilprev.loja.repositorio.ClienteRepositorio;

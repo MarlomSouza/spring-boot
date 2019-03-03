@@ -35,6 +35,10 @@ public class Cliente {
         ExcecaoDeDominio.Quando(endereco == null, "Endereço é inválido");
     }
 
+    public long getId() {
+        return id;
+    }
+
     public String getNome() {
         return nome;
     }
