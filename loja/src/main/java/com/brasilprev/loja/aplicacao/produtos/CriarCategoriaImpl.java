@@ -3,9 +3,6 @@ package com.brasilprev.loja.aplicacao.produtos;
 import com.brasilprev.loja.dominio.entidade.produtos.Categoria;
 import com.brasilprev.loja.repositorio.CategoriaRepositorio;
 
-/**
- * CriarCategoriaImpl
- */
 public class CriarCategoriaImpl implements CriarCategoria {
 
     private CategoriaRepositorio categoriaRepositorio;
