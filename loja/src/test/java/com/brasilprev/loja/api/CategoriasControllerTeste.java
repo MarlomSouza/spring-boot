@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import javax.naming.spi.DirStateFactory.Result;
-
 import com.brasilprev.loja.api.controller.CategoriasController;
 import com.brasilprev.loja.aplicacao.produtos.CategoriaDto;
 import com.brasilprev.loja.aplicacao.produtos.CriarCategoria;
@@ -33,7 +31,6 @@ public class CategoriasControllerTeste {
 
     @Before
     public void setUp() {
-
         criarCategoria = mock(CriarCategoria.class);
         categoriaRepositorio = mock(CategoriaRepositorio.class);
         categoriaController = new CategoriasController(categoriaRepositorio, criarCategoria);
