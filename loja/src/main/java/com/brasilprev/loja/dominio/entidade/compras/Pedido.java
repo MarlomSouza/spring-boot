@@ -71,7 +71,7 @@ public class Pedido {
 
     public void adicionarItemPedido(ItemPedido itemPedido) {
         ExcecaoDeDominio.Quando(itemPedido == null, "Item do pedido inválido");
-        ExcecaoDeDominio.Quando(this.statusPedido == StatusPedido.FECHADO, "Pedido está fechado");
+        ExcecaoDeDominio.Quando(getStatusPedido() == StatusPedido.FECHADO, "Pedido está fechado");
 
         this.itensPedido.add(itemPedido);
     }

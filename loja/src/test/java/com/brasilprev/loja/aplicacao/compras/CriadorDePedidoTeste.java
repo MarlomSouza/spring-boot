@@ -28,12 +28,16 @@ public class CriadorDePedidoTeste {
     private ClienteRepositorio clienteRepositorio;
     private ProdutoRepositorio produtoRepositorio;
     private ItemPedidoDto itemPedidoDto;
+    private Cliente cliente;
+    private Produto produto;
 
     @Before
     public void setUp() {
         pedidoRepositorio = mock(PedidoRepositorio.class);
         clienteRepositorio = mock(ClienteRepositorio.class);
         produtoRepositorio = mock(ProdutoRepositorio.class);
+        cliente = mock(Cliente.class);
+        produto = mock(Produto.class);
         criadorDePedido = new CriadorDePedidoImpl(pedidoRepositorio, clienteRepositorio, produtoRepositorio);
         pedidoDto = new PedidoDto();
         itemPedidoDto = mock(ItemPedidoDto.class);
@@ -46,8 +50,6 @@ public class CriadorDePedidoTeste {
 
     @Test
     public void deve_criar() {
-        Cliente cliente = mock(Cliente.class);
-        Produto produto = mock(Produto.class);
         when(produto.getPreco()).thenReturn(BigDecimal.TEN);
         when(clienteRepositorio.findById(pedidoDto.clienteId)).thenReturn(Optional.of(cliente));
         when(produtoRepositorio.findById(itemPedidoDto.produtoId)).thenReturn(Optional.of(produto));
@@ -69,7 +71,6 @@ public class CriadorDePedidoTeste {
 
     @Test
     public void deve_disparar_exececao_quando_nao_encontrar_produto() {
-        Cliente cliente = mock(Cliente.class);
         when(clienteRepositorio.findById(pedidoDto.clienteId)).thenReturn(Optional.of(cliente));
         ThrowingCallable act = () -> {
             criadorDePedido.criar(pedidoDto);
@@ -82,7 +83,6 @@ public class CriadorDePedidoTeste {
     @Test
     public void deve_disparar_excecao_quando_nao_encontrar_pedido() {
         pedidoDto.pedidoId = 23;
-        Cliente cliente = mock(Cliente.class);
         when(clienteRepositorio.findById(pedidoDto.clienteId)).thenReturn(Optional.of(cliente));
 
         ThrowingCallable act = () -> {
@@ -95,8 +95,6 @@ public class CriadorDePedidoTeste {
 
     @Test
     public void deve_adicionar_um_item_pedido_a_pedido_existente() {
-        Cliente cliente = mock(Cliente.class);
-        Produto produto = mock(Produto.class);
         Pedido pedido = new Pedido(cliente);
         pedidoDto.pedidoId = 15;
 
