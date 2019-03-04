@@ -6,16 +6,27 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private static final String[] AUTH_WHITELIST = { "/v2/api-docs", "/swagger-resources", "/swagger-resources/**",
+            "/configuration/ui", "/configuration/security", "/swagger-ui.html", "/webjars/**" };
+    private ValidaUsuario validaUsuario;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    public WebSecurityConfig(ValidaUsuario validaUsuario, BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.validaUsuario = validaUsuario;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
+
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.csrf().disable().authorizeRequests().antMatchers("/").permitAll().antMatchers("/home").permitAll()
-                .antMatchers(HttpMethod.POST, "/login").permitAll().anyRequest().permitAll().and()
+        httpSecurity.csrf().disable().authorizeRequests().antMatchers("/home").permitAll().antMatchers(AUTH_WHITELIST)
+                .permitAll().antMatchers(HttpMethod.POST, "/login").permitAll().anyRequest().authenticated().and()
 
                 // filtra requisições de login
                 .addFilterBefore(new JWTLoginFilter("/login", authenticationManager()),
@@ -26,9 +37,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        // cria uma conta default
-
-        auth.inMemoryAuthentication().withUser("user").password("{noop}password").roles("USER");
+    public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
+        authenticationManagerBuilder.userDetailsService(validaUsuario).passwordEncoder(bCryptPasswordEncoder);
     }
+
 }

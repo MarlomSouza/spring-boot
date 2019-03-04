@@ -28,7 +28,7 @@ CREATE TABLE dbo.Produto
     foto [VARCHAR](255) NOT NULL,
     quantidade INT NOT NULL,
     preco numeric(19, 2) NOT NULL,
-    categoria_id INT  NOT NULL,
+    categoria_id INT NOT NULL,
     FOREIGN KEY (categoria_id) REFERENCES Categoria(id)
 );
 
@@ -54,10 +54,17 @@ CREATE TABLE dbo.Item_Pedido
 );
 GO
 
-CREATE TABLE dbo.Pedido_Itens_Pedido(
+CREATE TABLE dbo.Pedido_Itens_Pedido
+(
     pedido_id INT NOT NULL,
     itens_pedido_id INT NOT NULL,
     FOREIGN KEY (pedido_id) REFERENCES Pedido (id),
     FOREIGN KEY (itens_pedido_id) REFERENCES Item_Pedido (id)
 )
 
+
+INSERT INTO dbo.Cliente
+    (nome,email,senha,rua,bairro,cep,cidade,estado)
+VALUES
+    ( 'admin', 'admin@admin.com', '$2a$10$ej4sKIhMhLqxklBpwyd2BOSE0Vobj8.04.S9ojxUSDqAf9b5kudgu', 'rua', 'bairro', 'cep', 'cidade', 'ms')
+GO
