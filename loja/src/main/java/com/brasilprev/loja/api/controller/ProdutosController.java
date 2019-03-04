@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(ProdutosController.API_PATH)
 public class ProdutosController {
 
+    static final String API_PATH = "api/produtos/";
     private CriadorDeProduto criadorDeProduto;
     private ProdutoRepositorio produtoRepositorio;
-    static final String API_PATH = "api/produtos/";
 
     @Autowired
     public ProdutosController(ProdutoRepositorio produtoRepositorio, CriadorDeProduto criadorDeProduto) {

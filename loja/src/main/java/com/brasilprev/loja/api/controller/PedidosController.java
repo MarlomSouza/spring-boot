@@ -43,7 +43,7 @@ public class PedidosController {
         return ResponseEntity.ok(pedidoRepositorio.findAll());
     }
 
-    @GetMapping
+    @GetMapping("{id}")
     public ResponseEntity<Pedido> get(@PathVariable long id) {
         return ResponseEntity.of(pedidoRepositorio.findById(id));
     }
