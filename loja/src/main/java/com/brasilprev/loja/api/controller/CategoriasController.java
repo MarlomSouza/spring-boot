@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -31,7 +32,7 @@ public class CategoriasController {
     }
 
     @PostMapping
-    public ResponseEntity<?> post(CategoriaDto categoriaDto) {
+    public ResponseEntity<?> post(@RequestBody CategoriaDto categoriaDto) {
         Categoria categoria = criadorDeCategoria.criar(categoriaDto);
         URI path = URI.create(API_CATEGORIAS + categoria.getId());
         return ResponseEntity.created(path).build();

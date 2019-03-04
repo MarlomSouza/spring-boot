@@ -1,6 +1,7 @@
 package com.brasilprev.loja.dominio.entidade.compras;
 
-import java.time.ZonedDateTime;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -25,19 +26,22 @@ public class Pedido {
     @OneToOne
     private Cliente cliente;
     private StatusPedido statusPedido;
-    private ZonedDateTime dataPedido;
+    private Timestamp dataPedido;
     private UUID sessao;
     @OneToMany(cascade = CascadeType.ALL)
-    private List<ItemPedido> itenspedido;
+    private List<ItemPedido> itemPedido;
+
+    private Pedido() {
+    }
 
     public Pedido(Cliente cliente) {
         ExcecaoDeDominio.Quando(cliente == null, "Cliente inválido");
 
         this.cliente = cliente;
         this.statusPedido = StatusPedido.ABERTO;
-        this.dataPedido = ZonedDateTime.now();
+        this.dataPedido = Timestamp.from(Instant.now());
         this.sessao = UUID.randomUUID();
-        this.itenspedido = new ArrayList<ItemPedido>();
+        this.itemPedido = new ArrayList<ItemPedido>();
     }
 
     public long getId() {
@@ -48,7 +52,7 @@ public class Pedido {
         return cliente;
     }
 
-    public ZonedDateTime getDataPedido() {
+    public Timestamp getDataPedido() {
         return dataPedido;
     }
 
@@ -68,11 +72,11 @@ public class Pedido {
         ExcecaoDeDominio.Quando(itemPedido == null, "Item do pedido inválido");
         ExcecaoDeDominio.Quando(this.statusPedido == StatusPedido.FECHADO, "Pedido está fechado");
 
-        this.itenspedido.add(itemPedido);
+        this.itemPedido.add(itemPedido);
     }
 
     public List<ItemPedido> getItensPedido() {
-        return itenspedido;
+        return itemPedido;
     }
 
 }

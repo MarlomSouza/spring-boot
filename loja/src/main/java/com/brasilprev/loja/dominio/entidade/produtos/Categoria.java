@@ -15,6 +15,9 @@ public class Categoria {
     private long id;
     private String nome;
 
+    private Categoria() {
+    }
+
     public Categoria(String nome) {
         ExcecaoDeDominio.Quando(nome == null || nome.trim().isEmpty(), "Nome é inválido");
 

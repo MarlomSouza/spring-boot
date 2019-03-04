@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import com.brasilprev.loja.dominio.entidade.produtos.Produto;
@@ -17,13 +18,16 @@ public class ItemPedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @OneToOne
+    @ManyToOne
     private Pedido pedido;
     @OneToOne
     private Produto produto;
     private int quantidade;
     private BigDecimal valor;
     private BigDecimal subTotal;
+
+    private ItemPedido(){
+    }
 
     public ItemPedido(Pedido pedido, Produto produto, int quantidade) {
         validar(pedido, produto, quantidade);

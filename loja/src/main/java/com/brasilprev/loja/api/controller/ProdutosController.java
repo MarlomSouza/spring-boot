@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -31,7 +32,7 @@ public class ProdutosController {
     }
 
     @PostMapping
-    public ResponseEntity<Produto> post(ProdutoDto produtoDto) {
+    public ResponseEntity<Produto> post(@RequestBody ProdutoDto produtoDto) {
         Produto produto = criadorDeProduto.criar(produtoDto);
         URI path = URI.create(API_PATH + produto.getId());
         return ResponseEntity.created(path).build();

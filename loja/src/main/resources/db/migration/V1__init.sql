@@ -1,7 +1,7 @@
 
 CREATE TABLE dbo.Cliente
 (
-    id INT NOT NULL PRIMARY KEY,
+    id INT NOT NULL PRIMARY KEY IDENTITY(1, 1),
     nome [VARCHAR](255) NOT NULL,
     email [VARCHAR](255) NOT NULL,
     senha [VARCHAR](255) NOT NULL,
@@ -15,9 +15,9 @@ GO
 
 CREATE TABLE dbo.Pedido
 (
-    id INT NOT NULL PRIMARY KEY,
+    id INT NOT NULL PRIMARY KEY IDENTITY(1, 1),
     status_Pedido INT NOT NULL,
-    data_pedido [TIMESTAMP] NOT NULL,
+    data_pedido [DATETIME] NOT NULL,
     sessao [VARCHAR](255) NOT NULL,
     cliente_id INT NOT NULL,
     FOREIGN KEY (cliente_id) REFERENCES Cliente(id)
@@ -26,14 +26,14 @@ GO
 
 CREATE TABLE dbo.Categoria
 (
-    id INT NOT NULL PRIMARY KEY,
+    id INT NOT NULL PRIMARY KEY IDENTITY(1, 1),
     nome [VARCHAR](255) NOT NULL,
 );
 GO
 
 CREATE TABLE dbo.Produto
 (
-    id INT NOT NULL PRIMARY KEY,
+    id INT NOT NULL PRIMARY KEY IDENTITY(1, 1),
     nome [VARCHAR](255) NOT NULL,
     descricao [VARCHAR](255) NOT NULL,
     foto [VARCHAR](255) NOT NULL,
@@ -46,7 +46,7 @@ GO
 
 CREATE TABLE dbo.ItemPedido
 (
-    Id INT NOT NULL PRIMARY KEY,
+    Id INT NOT NULL PRIMARY KEY IDENTITY(1, 1),
     pedido_id INT NOT NULL,
     produto_id INT NOT NULL,
     quantidade INT NOT NULL,

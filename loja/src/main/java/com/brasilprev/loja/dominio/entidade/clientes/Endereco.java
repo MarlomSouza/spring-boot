@@ -13,6 +13,9 @@ public class Endereco {
     private String cep;
     private String estado;
 
+    private Endereco(){
+    }
+
     public Endereco(String rua, String bairro, String cep, String cidade, String estado) {
         validar(rua, bairro, cep, cidade, estado);
 

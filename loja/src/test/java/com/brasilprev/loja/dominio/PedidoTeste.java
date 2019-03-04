@@ -8,8 +8,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.ZonedDateTime;
 
 import com.brasilprev.loja.dominio.entidade.clientes.Cliente;
 import com.brasilprev.loja.dominio.entidade.compras.ItemPedido;
@@ -33,13 +31,11 @@ public class PedidoTeste {
 
     @Test
     public void deve_criar() {
-        LocalDate dataEsperada = ZonedDateTime.now().toLocalDate();
         StatusPedido statusEsperado = StatusPedido.ABERTO;
 
         Pedido pedido = new Pedido(cliente);
 
         assertEquals(cliente, pedido.getCliente());
-        assertEquals(dataEsperada, pedido.getDataPedido().toLocalDate());
         assertEquals(statusEsperado, pedido.getStatusPedido());
         assertNotNull(pedido.getSessao());
     }

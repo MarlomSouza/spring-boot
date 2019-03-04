@@ -24,6 +24,9 @@ public class Produto {
     @OneToOne
     private Categoria categoria;
 
+    private Produto(){
+    }
+
     public Produto(String nome, String descricao, String foto, BigDecimal preco, int quantidade, Categoria categoria) {
         validar(nome, descricao, foto, preco, quantidade, categoria);
 

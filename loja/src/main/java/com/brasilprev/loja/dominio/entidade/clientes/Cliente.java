@@ -18,6 +18,9 @@ public class Cliente {
     private String senha;
     private Endereco endereco;
 
+    private Cliente(){
+    }
+
     public Cliente(String nome, String email, String senha, Endereco endereco) {
         validar(nome, email, senha, endereco);
         this.nome = nome;

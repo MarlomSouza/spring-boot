@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -41,7 +42,7 @@ public class ClientesController {
     }
 
     @PostMapping
-    public ResponseEntity<Cliente> post(ClienteDto clienteDto) {
+    public ResponseEntity<Cliente> post(@RequestBody ClienteDto clienteDto) {
         Cliente cliente = criadorDeCliente.criar(clienteDto);
         URI path = URI.create(API_PATH + cliente.getId());
         return ResponseEntity.created(path).build();
