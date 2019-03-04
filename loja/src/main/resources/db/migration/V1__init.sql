@@ -16,10 +16,10 @@ GO
 CREATE TABLE dbo.Pedido
 (
     id INT NOT NULL PRIMARY KEY,
-    status INT NOT NULL,
-    data [TIMESTAMP] NOT NULL,
-    sessao [VARCHAR](255) not null,
-    cliente_id INT not null,
+    status_Pedido INT NOT NULL,
+    data_pedido [TIMESTAMP] NOT NULL,
+    sessao [VARCHAR](255) NOT NULL,
+    cliente_id INT NOT NULL,
     FOREIGN KEY (cliente_id) REFERENCES Cliente(id)
 );
 GO
@@ -38,15 +38,17 @@ CREATE TABLE dbo.Produto
     descricao [VARCHAR](255) NOT NULL,
     foto [VARCHAR](255) NOT NULL,
     quantidade INT NOT NULL,
-    preco numeric(19, 2) NOT NULL
+    preco numeric(19, 2) NOT NULL,
+    categoria_id INT  NOT NULL,
+    FOREIGN KEY (categoria_id) REFERENCES Categoria(id)
 );
 GO
 
 CREATE TABLE dbo.ItemPedido
 (
     Id INT NOT NULL PRIMARY KEY,
-    pedido_id INT not null,
-    produto_id INT not null,
+    pedido_id INT NOT NULL,
+    produto_id INT NOT NULL,
     quantidade INT NOT NULL,
     valor numeric(19, 2) NOT NULL,
     subtotal numeric(19, 2) NOT NULL,
