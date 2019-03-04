@@ -29,7 +29,7 @@ public class Pedido {
     private Timestamp dataPedido;
     private UUID sessao;
     @OneToMany(cascade = CascadeType.ALL)
-    private List<ItemPedido> itemPedido;
+    private List<ItemPedido> itensPedido = new ArrayList<>();
 
     private Pedido() {
     }
@@ -41,7 +41,6 @@ public class Pedido {
         this.statusPedido = StatusPedido.ABERTO;
         this.dataPedido = Timestamp.from(Instant.now());
         this.sessao = UUID.randomUUID();
-        this.itemPedido = new ArrayList<ItemPedido>();
     }
 
     public long getId() {
@@ -72,11 +71,11 @@ public class Pedido {
         ExcecaoDeDominio.Quando(itemPedido == null, "Item do pedido inválido");
         ExcecaoDeDominio.Quando(this.statusPedido == StatusPedido.FECHADO, "Pedido está fechado");
 
-        this.itemPedido.add(itemPedido);
+        this.itensPedido.add(itemPedido);
     }
 
     public List<ItemPedido> getItensPedido() {
-        return itemPedido;
+        return itensPedido;
     }
 
 }

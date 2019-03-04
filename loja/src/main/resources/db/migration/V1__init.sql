@@ -13,17 +13,6 @@ CREATE TABLE dbo.Cliente
 );
 GO
 
-CREATE TABLE dbo.Pedido
-(
-    id INT NOT NULL PRIMARY KEY IDENTITY(1, 1),
-    status_Pedido INT NOT NULL,
-    data_pedido [DATETIME] NOT NULL,
-    sessao [VARCHAR](255) NOT NULL,
-    cliente_id INT NOT NULL,
-    FOREIGN KEY (cliente_id) REFERENCES Cliente(id)
-);
-GO
-
 CREATE TABLE dbo.Categoria
 (
     id INT NOT NULL PRIMARY KEY IDENTITY(1, 1),
@@ -42,17 +31,33 @@ CREATE TABLE dbo.Produto
     categoria_id INT  NOT NULL,
     FOREIGN KEY (categoria_id) REFERENCES Categoria(id)
 );
+
+CREATE TABLE dbo.Pedido
+(
+    id INT NOT NULL PRIMARY KEY IDENTITY(1, 1),
+    status_Pedido INT NOT NULL,
+    data_pedido [DATETIME] NOT NULL,
+    sessao [VARCHAR](255) NOT NULL,
+    cliente_id INT NOT NULL,
+    FOREIGN KEY (cliente_id) REFERENCES Cliente(id)
+);
 GO
 
-CREATE TABLE dbo.ItemPedido
+CREATE TABLE dbo.Item_Pedido
 (
     Id INT NOT NULL PRIMARY KEY IDENTITY(1, 1),
-    pedido_id INT NOT NULL,
     produto_id INT NOT NULL,
     quantidade INT NOT NULL,
     valor numeric(19, 2) NOT NULL,
-    subtotal numeric(19, 2) NOT NULL,
-    FOREIGN KEY (pedido_id) REFERENCES Pedido (id),
+    sub_total numeric(19, 2) NOT NULL,
     FOREIGN KEY (produto_id) REFERENCES Produto (id)
 );
 GO
+
+CREATE TABLE dbo.Pedido_Itens_Pedido(
+    pedido_id INT NOT NULL,
+    itens_pedido_id INT NOT NULL,
+    FOREIGN KEY (pedido_id) REFERENCES Pedido (id),
+    FOREIGN KEY (itens_pedido_id) REFERENCES Item_Pedido (id)
+)
+

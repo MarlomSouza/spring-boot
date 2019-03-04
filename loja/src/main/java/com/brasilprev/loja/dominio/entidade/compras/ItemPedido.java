@@ -6,7 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import com.brasilprev.loja.dominio.entidade.produtos.Produto;
@@ -18,35 +17,27 @@ public class ItemPedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @ManyToOne
-    private Pedido pedido;
     @OneToOne
     private Produto produto;
     private int quantidade;
     private BigDecimal valor;
     private BigDecimal subTotal;
 
-    private ItemPedido(){
+    private ItemPedido() {
     }
 
-    public ItemPedido(Pedido pedido, Produto produto, int quantidade) {
-        validar(pedido, produto, quantidade);
+    public ItemPedido(Produto produto, int quantidade) {
+        validar(produto, quantidade);
 
-        this.pedido = pedido;
         this.produto = produto;
         this.quantidade = quantidade;
         this.valor = produto.getPreco();
         this.subTotal = valor.multiply(new BigDecimal(quantidade));
     }
 
-    private void validar(Pedido pedido, Produto produto, int quantidade) {
-        ExcecaoDeDominio.Quando(pedido == null, "Pedido é inválido");
+    private void validar( Produto produto, int quantidade) {
         ExcecaoDeDominio.Quando(produto == null, "Produto é inválido");
         ExcecaoDeDominio.Quando(quantidade <= 0, "Quantidade é inválida");
-    }
-
-    public Pedido getPedido() {
-        return pedido;
     }
 
     public Produto getProduto() {

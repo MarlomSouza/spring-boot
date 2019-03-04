@@ -42,7 +42,7 @@ public class CriadorDePedidoImpl implements CriadorDePedido {
 
             ExcecaoDeAplicacao.Quando(produto == null, "Produto não foi encontrado");
 
-            ItemPedido itemPedido = new ItemPedido(pedido, produto, itemPedidoDto.quantidade);
+            ItemPedido itemPedido = new ItemPedido(produto, itemPedidoDto.quantidade);
             pedido.adicionarItemPedido(itemPedido);
         }
 

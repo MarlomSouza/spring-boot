@@ -49,7 +49,7 @@ public class PedidosController {
         return ResponseEntity.of(pedidoRepositorio.findById(id));
     }
 
-    @PutMapping(PedidosController.API_PATH + "{id}/adicionarItem")
+    @PutMapping("{id}/adicionarItem")
     public ResponseEntity<Pedido> put(@PathVariable long id, @RequestBody PedidoDto pedidoDto) {
         pedidoDto.pedidoId = id;
         criadorDePedido.criar(pedidoDto);

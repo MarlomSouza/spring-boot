@@ -1,14 +1,12 @@
 package com.brasilprev.loja.dominio;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
-import com.brasilprev.loja.dominio.entidade.compras.Pedido;
 import com.brasilprev.loja.dominio.entidade.compras.ItemPedido;
 import com.brasilprev.loja.dominio.entidade.produtos.Produto;
 import com.brasilprev.loja.dominio.excecao.ExcecaoDeDominio;
@@ -18,14 +16,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class ItemPedidoTeste {
-
-    private Pedido pedido;
     private Produto produto;
     private int quantidade;
 
     @Before
     public void setUp() {
-        pedido = mock(Pedido.class);
         produto = mock(Produto.class);
         quantidade = 10;
     }
@@ -36,9 +31,8 @@ public class ItemPedidoTeste {
         BigDecimal valor = new BigDecimal(100);
         when(produto.getPreco()).thenReturn(valor);
 
-        ItemPedido itemPedido = new ItemPedido(pedido, produto, quantidade);
+        ItemPedido itemPedido = new ItemPedido(produto, quantidade);
 
-        assertEquals(pedido, itemPedido.getPedido());
         assertEquals(produto, itemPedido.getProduto());
         assertEquals(quantidade, itemPedido.getQuantidade());
         assertEquals(valor, itemPedido.getValor());
@@ -46,22 +40,11 @@ public class ItemPedidoTeste {
     }
 
     @Test
-    public void nao_deve_criar_com_pedido_invalido() {
-        pedido = null;
-
-        ThrowingCallable act = () -> {
-            new ItemPedido(pedido, produto, quantidade);
-        };
-
-        assertThatThrownBy(act).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Pedido é inválido");
-    }
-
-    @Test
     public void nao_deve_criar_com_produto_invalido() {
         produto = null;
 
         ThrowingCallable act = () -> {
-            new ItemPedido(pedido, produto, quantidade);
+            new ItemPedido(produto, quantidade);
         };
 
         assertThatThrownBy(act).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Produto é inválido");
@@ -72,7 +55,7 @@ public class ItemPedidoTeste {
         quantidade = 0;
 
         ThrowingCallable act = () -> {
-            new ItemPedido(pedido, produto, quantidade);
+            new ItemPedido(produto, quantidade);
         };
 
         assertThatThrownBy(act).isInstanceOf(ExcecaoDeDominio.class).hasMessageContaining("Quantidade é inválida");

@@ -64,7 +64,7 @@ public class PedidoTeste {
         Pedido pedido = new Pedido(cliente);
         Produto produto = mock(Produto.class);
         when(produto.getPreco()).thenReturn(new BigDecimal(10));
-        ItemPedido itemPedido = new ItemPedido(pedido, produto, 10);
+        ItemPedido itemPedido = new ItemPedido(produto, 10);
         ItemPedido[] itensPedidoEsperado = { itemPedido };
 
         pedido.adicionarItemPedido(itemPedido);
