@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,8 +29,8 @@ public class Pedido {
     private StatusPedido statusPedido;
     private Timestamp dataPedido;
     private UUID sessao;
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<ItemPedido> itensPedido = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<ItemPedido> itensPedido;
 
     private Pedido() {
     }
@@ -41,6 +42,7 @@ public class Pedido {
         this.statusPedido = StatusPedido.ABERTO;
         this.dataPedido = Timestamp.from(Instant.now());
         this.sessao = UUID.randomUUID();
+        this.itensPedido = new ArrayList<>();
     }
 
     public long getId() {

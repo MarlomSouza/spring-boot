@@ -41,11 +41,11 @@ public class CriadorDePedidoImpl implements CriadorDePedido {
             Produto produto = produtoRepositorio.findById(itemPedidoDto.produtoId).orElse(null);
 
             ExcecaoDeAplicacao.Quando(produto == null, "Produto não foi encontrado");
-
+            produto.removerQuantidade(itemPedidoDto.quantidade);
+            produtoRepositorio.save(produto);
             ItemPedido itemPedido = new ItemPedido(produto, itemPedidoDto.quantidade);
             pedido.adicionarItemPedido(itemPedido);
         }
-
     }
 
     private Pedido obterPedido(PedidoDto pedidoDto) {
