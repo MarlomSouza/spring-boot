@@ -23,9 +23,8 @@ public class CriadorDeProdutoImpl implements CriadorDeProduto {
 
     @Override
     public Produto executar(ProdutoDto produtoDto) {
-        Categoria categoria = categoriaRepositorio.findById(produtoDto.categoriaId).orElse(null);
-
-        ExcecaoDeAplicacao.Quando(categoria == null, "Categoria não foi encontrada");
+        Categoria categoria = categoriaRepositorio.findById(produtoDto.categoriaId)
+                .orElseThrow(() -> new ExcecaoDeAplicacao("Categoria não foi encontrada"));
 
         Produto produto = mapearProduto(produtoDto, categoria);
         produtoRepositorio.save(produto);

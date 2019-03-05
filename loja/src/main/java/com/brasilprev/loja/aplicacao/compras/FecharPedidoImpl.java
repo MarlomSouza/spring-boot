@@ -19,8 +19,9 @@ public class FecharPedidoImpl implements FecharPedido {
 
     @Override
     public Pedido executar(Long pedidoId) {
-        Pedido pedido = pedidoRepositorio.findById(pedidoId).orElse(null);
-        ExcecaoDeAplicacao.Quando(pedido == null, "Pedido não encontrado");
+        Pedido pedido = pedidoRepositorio.findById(pedidoId)
+                .orElseThrow(() -> new ExcecaoDeAplicacao("Pedido não encontrado"));
+
         pedido.fecharPedido();
         pedidoRepositorio.save(pedido);
         return pedido;

@@ -45,13 +45,13 @@ public class CriadorDePedidoTeste {
         itemPedidoDto.produtoId = 1;
         itemPedidoDto.quantidade = 3;
         pedidoDto.itensPedido = new ItemPedidoDto[] { itemPedidoDto };
+        when(clienteRepositorio.findById(pedidoDto.clienteId)).thenReturn(Optional.of(cliente));
 
     }
 
     @Test
     public void deve_criar() {
         when(produto.getPreco()).thenReturn(BigDecimal.TEN);
-        when(clienteRepositorio.findById(pedidoDto.clienteId)).thenReturn(Optional.of(cliente));
         when(produtoRepositorio.findById(itemPedidoDto.produtoId)).thenReturn(Optional.of(produto));
 
         Pedido pedido = criadorDePedido.executar(pedidoDto);
@@ -61,6 +61,8 @@ public class CriadorDePedidoTeste {
 
     @Test
     public void deve_disparar_exececao_quando_nao_encontrar_cliente() {
+        when(clienteRepositorio.findById(pedidoDto.clienteId)).thenThrow(new ExcecaoDeAplicacao("Cliente não foi encontrado"));
+
         ThrowingCallable act = () -> {
             criadorDePedido.executar(pedidoDto);
         };
@@ -71,7 +73,6 @@ public class CriadorDePedidoTeste {
 
     @Test
     public void deve_disparar_exececao_quando_nao_encontrar_produto() {
-        when(clienteRepositorio.findById(pedidoDto.clienteId)).thenReturn(Optional.of(cliente));
         ThrowingCallable act = () -> {
             criadorDePedido.executar(pedidoDto);
         };
@@ -83,7 +84,6 @@ public class CriadorDePedidoTeste {
     @Test
     public void deve_disparar_excecao_quando_nao_encontrar_pedido() {
         pedidoDto.pedidoId = 23;
-        when(clienteRepositorio.findById(pedidoDto.clienteId)).thenReturn(Optional.of(cliente));
 
         ThrowingCallable act = () -> {
             criadorDePedido.executar(pedidoDto);
@@ -97,8 +97,6 @@ public class CriadorDePedidoTeste {
     public void deve_adicionar_um_item_pedido_a_pedido_existente() {
         Pedido pedido = new Pedido(cliente);
         pedidoDto.pedidoId = 15;
-
-        when(clienteRepositorio.findById(pedidoDto.clienteId)).thenReturn(Optional.of(cliente));
         when(pedidoRepositorio.findById(pedidoDto.pedidoId)).thenReturn(Optional.of(pedido));
         when(produtoRepositorio.findById(itemPedidoDto.produtoId)).thenReturn(Optional.of(produto));
         when(produto.getPreco()).thenReturn(BigDecimal.TEN);
@@ -106,5 +104,16 @@ public class CriadorDePedidoTeste {
         Pedido pedidoAtualizado = criadorDePedido.executar(pedidoDto);
 
         verify(pedidoRepositorio).save(pedidoAtualizado);
+    }
+
+    @Test
+    public void deve_atualizar_quantidade_de_produto() {
+        when(produtoRepositorio.findById(itemPedidoDto.produtoId)).thenReturn(Optional.of(produto));
+        when(produto.getPreco()).thenReturn(BigDecimal.TEN);
+
+        criadorDePedido.executar(pedidoDto);
+
+        verify(produto).removerQuantidade(itemPedidoDto.quantidade);
+        verify(produtoRepositorio).save(produto);
     }
 }

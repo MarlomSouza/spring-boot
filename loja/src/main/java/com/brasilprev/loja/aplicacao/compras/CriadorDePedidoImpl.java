@@ -38,9 +38,9 @@ public class CriadorDePedidoImpl implements CriadorDePedido {
     private void adicionarItemPedido(Pedido pedido, ItemPedidoDto[] itensPedido) {
         for (ItemPedidoDto itemPedidoDto : itensPedido) {
 
-            Produto produto = produtoRepositorio.findById(itemPedidoDto.produtoId).orElse(null);
+            Produto produto = produtoRepositorio.findById(itemPedidoDto.produtoId)
+                    .orElseThrow(() -> new ExcecaoDeAplicacao("Produto não foi encontrado"));
 
-            ExcecaoDeAplicacao.Quando(produto == null, "Produto não foi encontrado");
             produto.removerQuantidade(itemPedidoDto.quantidade);
             produtoRepositorio.save(produto);
             ItemPedido itemPedido = new ItemPedido(produto, itemPedidoDto.quantidade);
@@ -49,15 +49,14 @@ public class CriadorDePedidoImpl implements CriadorDePedido {
     }
 
     private Pedido obterPedido(PedidoDto pedidoDto) {
-        Cliente cliente = clienteRepositorio.findById(pedidoDto.clienteId).orElse(null);
-
-        ExcecaoDeAplicacao.Quando(cliente == null, "Cliente não foi encontrado");
+        Cliente cliente = clienteRepositorio.findById(pedidoDto.clienteId)
+                .orElseThrow(() -> new ExcecaoDeAplicacao("Cliente não foi encontrado"));
 
         if (pedidoDto.pedidoId == 0)
             return new Pedido(cliente);
 
-        Pedido pedido = pedidoRepositorio.findById(pedidoDto.pedidoId).orElse(null);
-        ExcecaoDeAplicacao.Quando(pedido == null, "Pedido não foi encontrado");
+        Pedido pedido = pedidoRepositorio.findById(pedidoDto.pedidoId)
+                .orElseThrow(() -> new ExcecaoDeAplicacao("Pedido não foi encontrado"));
 
         return pedido;
     }

@@ -4,7 +4,7 @@ public class ExcecaoDeAplicacao extends RuntimeException {
 
     private static final long serialVersionUID = 2L;
 
-    private ExcecaoDeAplicacao(String mensagem) {
+    public ExcecaoDeAplicacao(String mensagem) {
         super(mensagem);
     }
 
