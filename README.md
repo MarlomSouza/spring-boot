@@ -1,4 +1,4 @@
-##Brasilprev - Loja
+## Brasilprev - Loja
 
 Esta é uma API para loja, é uma estrutura que serve de base para uma loja online que trabalha com produtos, clientes , categoria e pedidos.
 
@@ -23,3 +23,11 @@ Para testes, o usuário **admin** já se encontra no banco de dados com a senha 
 O Token de autenticação estará na aba Headers.
 
 Para acessar os demais métodos, basta incluir o token na autenticação do tipo Bearer.
+
+
+### Endpoints
+
+- /api/categorias/
+- /api/produtos/
+- /api/pedidos/
+- /api/clientes/
