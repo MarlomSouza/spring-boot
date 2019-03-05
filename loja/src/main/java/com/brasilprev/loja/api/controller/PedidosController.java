@@ -34,7 +34,7 @@ public class PedidosController {
 
     @PostMapping
     public ResponseEntity<Pedido> post(@RequestBody PedidoDto pedidoDto) {
-        Pedido pedido = criadorDePedido.criar(pedidoDto);
+        Pedido pedido = criadorDePedido.executar(pedidoDto);
         URI uri = URI.create(API_PATH + pedido.getId());
         return ResponseEntity.created(uri).build();
     }
@@ -52,7 +52,7 @@ public class PedidosController {
     @PutMapping("{id}/adicionarItem")
     public ResponseEntity<Pedido> put(@PathVariable long id, @RequestBody PedidoDto pedidoDto) {
         pedidoDto.pedidoId = id;
-        criadorDePedido.criar(pedidoDto);
+        criadorDePedido.executar(pedidoDto);
         return ResponseEntity.noContent().build();
     }
 }

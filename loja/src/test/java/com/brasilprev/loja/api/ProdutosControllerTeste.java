@@ -42,7 +42,7 @@ public class ProdutosControllerTeste {
         final String localizacaoCriado = "api/produtos/" + produtoId;
 
         ProdutoDto produtoDto = mock(ProdutoDto.class);
-        when(criarProdutos.criar(produtoDto)).thenReturn(produto);
+        when(criarProdutos.executar(produtoDto)).thenReturn(produto);
         when(produto.getId()).thenReturn(produtoId);
 
         ResponseEntity<Produto> response = produtosController.post(produtoDto);

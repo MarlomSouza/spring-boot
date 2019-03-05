@@ -17,7 +17,7 @@ public class CriadorDeCategoriaTeste {
         CategoriaDto categoriaDto = new CategoriaDto();
         categoriaDto.nome = "Limpeza";
 
-        Categoria categoria = criadorDeCategoria.criar(categoriaDto);
+        Categoria categoria = criadorDeCategoria.executar(categoriaDto);
 
         verify(repositorio).save(categoria);
     }

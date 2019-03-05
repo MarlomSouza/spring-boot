@@ -17,7 +17,7 @@ public class CriadorDeCategoriaImpl implements CriadorDeCategoria {
     }
 
     @Override
-    public Categoria criar(CategoriaDto categoriaDto) {
+    public Categoria executar(CategoriaDto categoriaDto) {
         Categoria categoria = new Categoria(categoriaDto.nome);
         categoriaRepositorio.save(categoria);
         return categoria;

@@ -64,11 +64,11 @@ public class ClientesControllerTeste {
         final String localizacaoClienteCriado = "api/clientes/" + clienteId;
         ClienteDto clienteDto = mock(ClienteDto.class);
         when(cliente.getId()).thenReturn(clienteId);
-        when(criadorDeCliente.criar(clienteDto)).thenReturn(cliente);
+        when(criadorDeCliente.executar(clienteDto)).thenReturn(cliente);
 
         ResponseEntity<Cliente> response = clientesController.post(clienteDto);
 
-        verify(criadorDeCliente).criar(clienteDto);
+        verify(criadorDeCliente).executar(clienteDto);
         assertEquals(localizacaoClienteCriado, response.getHeaders().getLocation().getPath());
     }
 

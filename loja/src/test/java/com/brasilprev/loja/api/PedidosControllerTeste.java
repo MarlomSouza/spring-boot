@@ -46,7 +46,7 @@ public class PedidosControllerTeste {
         final String localizacaoCriado = "api/pedidos/" + pedidoId;
 
         PedidoDto pedidoDto = mock(PedidoDto.class);
-        when(criadorDePedido.criar(pedidoDto)).thenReturn(pedido);
+        when(criadorDePedido.executar(pedidoDto)).thenReturn(pedido);
         when(pedido.getId()).thenReturn(pedidoId);
 
         ResponseEntity<Pedido> response = pedidosController.post(pedidoDto);
@@ -89,11 +89,11 @@ public class PedidosControllerTeste {
     public void deve_adicionar_item_pedido_a_um_pedido() {
         final long pedidoId = 2;
         final PedidoDto pedidoDto = mock(PedidoDto.class);
-        when(criadorDePedido.criar(pedidoDto)).thenReturn(pedido);
+        when(criadorDePedido.executar(pedidoDto)).thenReturn(pedido);
 
         ResponseEntity<Pedido> response = pedidosController.put(pedidoId, pedidoDto);
 
-        verify(criadorDePedido).criar(pedidoDto);
+        verify(criadorDePedido).executar(pedidoDto);
         assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }
 

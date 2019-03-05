@@ -33,7 +33,7 @@ public class ProdutosController {
 
     @PostMapping
     public ResponseEntity<Produto> post(@RequestBody ProdutoDto produtoDto) {
-        Produto produto = criadorDeProduto.criar(produtoDto);
+        Produto produto = criadorDeProduto.executar(produtoDto);
         URI path = URI.create(API_PATH + produto.getId());
         return ResponseEntity.created(path).build();
     }

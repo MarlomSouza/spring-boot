@@ -43,7 +43,7 @@ public class ClientesController {
 
     @PostMapping
     public ResponseEntity<Cliente> post(@RequestBody ClienteDto clienteDto) {
-        Cliente cliente = criadorDeCliente.criar(clienteDto);
+        Cliente cliente = criadorDeCliente.executar(clienteDto);
         URI path = URI.create(API_PATH + cliente.getId());
         return ResponseEntity.created(path).build();
     }

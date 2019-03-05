@@ -54,7 +54,7 @@ public class CriadorDePedidoTeste {
         when(clienteRepositorio.findById(pedidoDto.clienteId)).thenReturn(Optional.of(cliente));
         when(produtoRepositorio.findById(itemPedidoDto.produtoId)).thenReturn(Optional.of(produto));
 
-        Pedido pedido = criadorDePedido.criar(pedidoDto);
+        Pedido pedido = criadorDePedido.executar(pedidoDto);
 
         verify(pedidoRepositorio).save(pedido);
     }
@@ -62,7 +62,7 @@ public class CriadorDePedidoTeste {
     @Test
     public void deve_disparar_exececao_quando_nao_encontrar_cliente() {
         ThrowingCallable act = () -> {
-            criadorDePedido.criar(pedidoDto);
+            criadorDePedido.executar(pedidoDto);
         };
 
         assertThatThrownBy(act).isInstanceOf(ExcecaoDeAplicacao.class)
@@ -73,7 +73,7 @@ public class CriadorDePedidoTeste {
     public void deve_disparar_exececao_quando_nao_encontrar_produto() {
         when(clienteRepositorio.findById(pedidoDto.clienteId)).thenReturn(Optional.of(cliente));
         ThrowingCallable act = () -> {
-            criadorDePedido.criar(pedidoDto);
+            criadorDePedido.executar(pedidoDto);
         };
 
         assertThatThrownBy(act).isInstanceOf(ExcecaoDeAplicacao.class)
@@ -86,7 +86,7 @@ public class CriadorDePedidoTeste {
         when(clienteRepositorio.findById(pedidoDto.clienteId)).thenReturn(Optional.of(cliente));
 
         ThrowingCallable act = () -> {
-            criadorDePedido.criar(pedidoDto);
+            criadorDePedido.executar(pedidoDto);
         };
 
         assertThatThrownBy(act).isInstanceOf(ExcecaoDeAplicacao.class)
@@ -103,7 +103,7 @@ public class CriadorDePedidoTeste {
         when(produtoRepositorio.findById(itemPedidoDto.produtoId)).thenReturn(Optional.of(produto));
         when(produto.getPreco()).thenReturn(BigDecimal.TEN);
 
-        Pedido pedidoAtualizado = criadorDePedido.criar(pedidoDto);
+        Pedido pedidoAtualizado = criadorDePedido.executar(pedidoDto);
 
         verify(pedidoRepositorio).save(pedidoAtualizado);
     }

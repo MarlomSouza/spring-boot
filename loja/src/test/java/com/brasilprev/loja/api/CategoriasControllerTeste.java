@@ -43,7 +43,7 @@ public class CategoriasControllerTeste {
         Categoria categoria = mock(Categoria.class);
         CategoriaDto categoriaDto = mock(CategoriaDto.class);
         when(categoria.getId()).thenReturn(categoriaId);
-        when(criadorDeCategoria.criar(categoriaDto)).thenReturn(categoria);
+        when(criadorDeCategoria.executar(categoriaDto)).thenReturn(categoria);
 
         ResponseEntity<?> response = categoriasController.post(categoriaDto);
 

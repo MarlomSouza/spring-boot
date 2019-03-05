@@ -22,7 +22,7 @@ public class CriadorDeProdutoImpl implements CriadorDeProduto {
     }
 
     @Override
-    public Produto criar(ProdutoDto produtoDto) {
+    public Produto executar(ProdutoDto produtoDto) {
         Categoria categoria = categoriaRepositorio.findById(produtoDto.categoriaId).orElse(null);
 
         ExcecaoDeAplicacao.Quando(categoria == null, "Categoria não foi encontrada");

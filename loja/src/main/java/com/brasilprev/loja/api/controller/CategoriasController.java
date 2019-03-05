@@ -33,7 +33,7 @@ public class CategoriasController {
 
     @PostMapping
     public ResponseEntity<?> post(@RequestBody CategoriaDto categoriaDto) {
-        Categoria categoria = criadorDeCategoria.criar(categoriaDto);
+        Categoria categoria = criadorDeCategoria.executar(categoriaDto);
         URI path = URI.create(API_CATEGORIAS + categoria.getId());
         return ResponseEntity.created(path).build();
     }

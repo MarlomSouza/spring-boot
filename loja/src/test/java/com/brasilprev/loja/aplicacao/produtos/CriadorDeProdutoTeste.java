@@ -45,7 +45,7 @@ public class CriadorDeProdutoTeste {
         Categoria categoria = new Categoria(nomeCategoria);
         when(categoriaRepositprio.findById(produtoDto.categoriaId)).thenReturn(Optional.of(categoria));
 
-        Produto produto = criarProduto.criar(produtoDto);
+        Produto produto = criarProduto.executar(produtoDto);
 
         verify(produtoRepositorio).save(produto);
     }
@@ -53,7 +53,7 @@ public class CriadorDeProdutoTeste {
     @Test
     public void deve_disparar_excecao_quando_nao_encontrar_categoria() {
         ThrowingCallable act = () -> {
-            criarProduto.criar(produtoDto);
+            criarProduto.executar(produtoDto);
         };
 
         assertThatThrownBy(act).isInstanceOf(ExcecaoDeAplicacao.class)

@@ -28,7 +28,7 @@ public class CriadorDeClienteTeste {
         clienteDto.estado = "ms";
         when(encoder.encode(clienteDto.senha)).thenReturn("sdasd8234");
 
-        Cliente cliente = criadorDeCliente.criar(clienteDto);
+        Cliente cliente = criadorDeCliente.executar(clienteDto);
 
         verify(repositorio).save(cliente);
     }

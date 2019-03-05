@@ -28,7 +28,7 @@ public class CriadorDePedidoImpl implements CriadorDePedido {
     }
 
     @Override
-    public Pedido criar(PedidoDto pedidoDto) {
+    public Pedido executar(PedidoDto pedidoDto) {
         Pedido pedido = obterPedido(pedidoDto);
         adicionarItemPedido(pedido, pedidoDto.itensPedido);
         pedidoRepositorio.save(pedido);

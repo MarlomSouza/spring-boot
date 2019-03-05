@@ -21,7 +21,7 @@ public class CriadorDeClienteImpl implements CriadorDeCliente {
     }
 
     @Override
-    public Cliente criar(ClienteDto clienteDto) {
+    public Cliente executar(ClienteDto clienteDto) {
         String senhaEncriptada = bCryptPasswordEncoder.encode(clienteDto.senha);
 
         Endereco endereco = new Endereco(clienteDto.rua, clienteDto.bairro, clienteDto.cep, clienteDto.cidade,
