@@ -46,14 +46,12 @@ public class CriadorDePedidoTeste {
         itemPedidoDto.quantidade = 3;
         pedidoDto.itensPedido = new ItemPedidoDto[] { itemPedidoDto };
         when(clienteRepositorio.findById(pedidoDto.clienteId)).thenReturn(Optional.of(cliente));
-
+        when(produtoRepositorio.findById(itemPedidoDto.produtoId)).thenReturn(Optional.of(produto));
+        when(produto.getPreco()).thenReturn(BigDecimal.TEN);
     }
 
     @Test
     public void deve_criar() {
-        when(produto.getPreco()).thenReturn(BigDecimal.TEN);
-        when(produtoRepositorio.findById(itemPedidoDto.produtoId)).thenReturn(Optional.of(produto));
-
         Pedido pedido = criadorDePedido.executar(pedidoDto);
 
         verify(pedidoRepositorio).save(pedido);
@@ -61,7 +59,8 @@ public class CriadorDePedidoTeste {
 
     @Test
     public void deve_disparar_exececao_quando_nao_encontrar_cliente() {
-        when(clienteRepositorio.findById(pedidoDto.clienteId)).thenThrow(new ExcecaoDeAplicacao("Cliente não foi encontrado"));
+        when(clienteRepositorio.findById(pedidoDto.clienteId))
+                .thenThrow(new ExcecaoDeAplicacao("Cliente não foi encontrado"));
 
         ThrowingCallable act = () -> {
             criadorDePedido.executar(pedidoDto);
@@ -73,6 +72,9 @@ public class CriadorDePedidoTeste {
 
     @Test
     public void deve_disparar_exececao_quando_nao_encontrar_produto() {
+        when(produtoRepositorio.findById(itemPedidoDto.produtoId))
+                .thenThrow(new ExcecaoDeAplicacao("Produto não foi encontrado"));
+
         ThrowingCallable act = () -> {
             criadorDePedido.executar(pedidoDto);
         };
@@ -98,8 +100,6 @@ public class CriadorDePedidoTeste {
         Pedido pedido = new Pedido(cliente);
         pedidoDto.pedidoId = 15;
         when(pedidoRepositorio.findById(pedidoDto.pedidoId)).thenReturn(Optional.of(pedido));
-        when(produtoRepositorio.findById(itemPedidoDto.produtoId)).thenReturn(Optional.of(produto));
-        when(produto.getPreco()).thenReturn(BigDecimal.TEN);
 
         Pedido pedidoAtualizado = criadorDePedido.executar(pedidoDto);
 
@@ -109,7 +109,6 @@ public class CriadorDePedidoTeste {
     @Test
     public void deve_atualizar_quantidade_de_produto() {
         when(produtoRepositorio.findById(itemPedidoDto.produtoId)).thenReturn(Optional.of(produto));
-        when(produto.getPreco()).thenReturn(BigDecimal.TEN);
 
         criadorDePedido.executar(pedidoDto);
 

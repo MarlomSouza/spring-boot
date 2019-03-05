@@ -5,6 +5,7 @@ import com.brasilprev.loja.dominio.entidade.clientes.Cliente;
 import com.brasilprev.loja.dominio.entidade.compras.ItemPedido;
 import com.brasilprev.loja.dominio.entidade.compras.Pedido;
 import com.brasilprev.loja.dominio.entidade.produtos.Produto;
+import com.brasilprev.loja.dominio.excecao.ExcecaoDeDominio;
 import com.brasilprev.loja.repositorio.ClienteRepositorio;
 import com.brasilprev.loja.repositorio.PedidoRepositorio;
 import com.brasilprev.loja.repositorio.ProdutoRepositorio;
@@ -29,10 +30,15 @@ public class CriadorDePedidoImpl implements CriadorDePedido {
 
     @Override
     public Pedido executar(PedidoDto pedidoDto) {
-        Pedido pedido = obterPedido(pedidoDto);
-        adicionarItemPedido(pedido, pedidoDto.itensPedido);
-        pedidoRepositorio.save(pedido);
-        return pedido;
+        try {
+
+            Pedido pedido = obterPedido(pedidoDto);
+            adicionarItemPedido(pedido, pedidoDto.itensPedido);
+            pedidoRepositorio.save(pedido);
+            return pedido;
+        } catch (ExcecaoDeDominio e) {
+            throw new ExcecaoDeAplicacao(e.getMessage());
+        }
     }
 
     private void adicionarItemPedido(Pedido pedido, ItemPedidoDto[] itensPedido) {
@@ -42,9 +48,9 @@ public class CriadorDePedidoImpl implements CriadorDePedido {
                     .orElseThrow(() -> new ExcecaoDeAplicacao("Produto não foi encontrado"));
 
             produto.removerQuantidade(itemPedidoDto.quantidade);
-            produtoRepositorio.save(produto);
             ItemPedido itemPedido = new ItemPedido(produto, itemPedidoDto.quantidade);
             pedido.adicionarItemPedido(itemPedido);
+            produtoRepositorio.save(produto);
         }
     }
 

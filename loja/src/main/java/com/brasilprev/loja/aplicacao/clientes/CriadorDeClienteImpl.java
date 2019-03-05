@@ -1,7 +1,9 @@
 package com.brasilprev.loja.aplicacao.clientes;
 
+import com.brasilprev.loja.aplicacao.ExcecaoDeAplicacao;
 import com.brasilprev.loja.dominio.entidade.clientes.Cliente;
 import com.brasilprev.loja.dominio.entidade.clientes.Endereco;
+import com.brasilprev.loja.dominio.excecao.ExcecaoDeDominio;
 import com.brasilprev.loja.repositorio.ClienteRepositorio;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +24,17 @@ public class CriadorDeClienteImpl implements CriadorDeCliente {
 
     @Override
     public Cliente executar(ClienteDto clienteDto) {
-        String senhaEncriptada = bCryptPasswordEncoder.encode(clienteDto.senha);
+        try {
+            String senhaEncriptada = bCryptPasswordEncoder.encode(clienteDto.senha);
 
-        Endereco endereco = new Endereco(clienteDto.rua, clienteDto.bairro, clienteDto.cep, clienteDto.cidade,
-                clienteDto.estado);
+            Endereco endereco = new Endereco(clienteDto.rua, clienteDto.bairro, clienteDto.cep, clienteDto.cidade,
+                    clienteDto.estado);
 
-        Cliente cliente = new Cliente(clienteDto.nome, clienteDto.email, senhaEncriptada, endereco);
-        clienteRepositorio.save(cliente);
-        return cliente;
+            Cliente cliente = new Cliente(clienteDto.nome, clienteDto.email, senhaEncriptada, endereco);
+            clienteRepositorio.save(cliente);
+            return cliente;
+        } catch (ExcecaoDeDominio e) {
+            throw new ExcecaoDeAplicacao(e.getMessage());
+        }
     }
 }

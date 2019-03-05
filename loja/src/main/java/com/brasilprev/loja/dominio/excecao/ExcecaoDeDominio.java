@@ -1,16 +1,15 @@
 package com.brasilprev.loja.dominio.excecao;
 
-public class ExcecaoDeDominio extends RuntimeException{
+public class ExcecaoDeDominio extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
 
-    ExcecaoDeDominio(String mensagem)
-    {
+    public ExcecaoDeDominio(String mensagem) {
         super(mensagem);
     }
 
-    public static void Quando(Boolean haErro, String mensagemDeErro){
-        if(haErro)
+    public static void Quando(Boolean haErro, String mensagemDeErro) {
+        if (haErro)
             throw new ExcecaoDeDominio(mensagemDeErro);
     }
 

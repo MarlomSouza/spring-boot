@@ -52,7 +52,7 @@ public class PedidosControllerTeste {
         when(criadorDePedido.executar(pedidoDto)).thenReturn(pedido);
         when(pedido.getId()).thenReturn(pedidoId);
 
-        ResponseEntity<Pedido> response = pedidosController.post(pedidoDto);
+        ResponseEntity<?> response = pedidosController.post(pedidoDto);
 
         assertEquals(localizacaoCriado, response.getHeaders().getLocation().getPath());
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
@@ -94,7 +94,7 @@ public class PedidosControllerTeste {
         final PedidoDto pedidoDto = mock(PedidoDto.class);
         when(criadorDePedido.executar(pedidoDto)).thenReturn(pedido);
 
-        ResponseEntity<Pedido> response = pedidosController.put(pedidoId, pedidoDto);
+        ResponseEntity<?> response = pedidosController.put(pedidoId, pedidoDto);
 
         verify(criadorDePedido).executar(pedidoDto);
         assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
@@ -104,7 +104,7 @@ public class PedidosControllerTeste {
     public void deve_fechar_um_pedido() {
         final long pedidoId = 2;
 
-        ResponseEntity<Pedido> response = pedidosController.put(pedidoId);
+        ResponseEntity<?> response = pedidosController.put(pedidoId);
 
         verify(fecharPedido).executar(pedidoId);
         assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());

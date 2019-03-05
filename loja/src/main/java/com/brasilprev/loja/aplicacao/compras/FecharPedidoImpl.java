@@ -2,6 +2,7 @@ package com.brasilprev.loja.aplicacao.compras;
 
 import com.brasilprev.loja.aplicacao.ExcecaoDeAplicacao;
 import com.brasilprev.loja.dominio.entidade.compras.Pedido;
+import com.brasilprev.loja.dominio.excecao.ExcecaoDeDominio;
 import com.brasilprev.loja.repositorio.PedidoRepositorio;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,15 @@ public class FecharPedidoImpl implements FecharPedido {
 
     @Override
     public Pedido executar(Long pedidoId) {
-        Pedido pedido = pedidoRepositorio.findById(pedidoId)
-                .orElseThrow(() -> new ExcecaoDeAplicacao("Pedido não encontrado"));
+        try {
+            Pedido pedido = pedidoRepositorio.findById(pedidoId)
+                    .orElseThrow(() -> new ExcecaoDeAplicacao("Pedido não encontrado"));
 
-        pedido.fecharPedido();
-        pedidoRepositorio.save(pedido);
-        return pedido;
+            pedido.fecharPedido();
+            pedidoRepositorio.save(pedido);
+            return pedido;
+        } catch (ExcecaoDeDominio e) {
+            throw new ExcecaoDeAplicacao(e.getMessage());
+        }
     }
 }

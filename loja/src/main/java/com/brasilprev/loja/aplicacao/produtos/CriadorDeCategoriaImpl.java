@@ -1,6 +1,8 @@
 package com.brasilprev.loja.aplicacao.produtos;
 
+import com.brasilprev.loja.aplicacao.ExcecaoDeAplicacao;
 import com.brasilprev.loja.dominio.entidade.produtos.Categoria;
+import com.brasilprev.loja.dominio.excecao.ExcecaoDeDominio;
 import com.brasilprev.loja.repositorio.CategoriaRepositorio;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +20,12 @@ public class CriadorDeCategoriaImpl implements CriadorDeCategoria {
 
     @Override
     public Categoria executar(CategoriaDto categoriaDto) {
-        Categoria categoria = new Categoria(categoriaDto.nome);
-        categoriaRepositorio.save(categoria);
-        return categoria;
+        try {
+            Categoria categoria = new Categoria(categoriaDto.nome);
+            categoriaRepositorio.save(categoria);
+            return categoria;
+        } catch (ExcecaoDeDominio e) {
+            throw new ExcecaoDeAplicacao(e.getMessage());
+        }
     }
 }

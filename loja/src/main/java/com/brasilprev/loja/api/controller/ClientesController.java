@@ -3,6 +3,7 @@ package com.brasilprev.loja.api.controller;
 import java.net.URI;
 import java.util.List;
 
+import com.brasilprev.loja.aplicacao.ExcecaoDeAplicacao;
 import com.brasilprev.loja.aplicacao.clientes.ClienteDto;
 import com.brasilprev.loja.aplicacao.clientes.CriadorDeCliente;
 import com.brasilprev.loja.dominio.entidade.clientes.Cliente;
@@ -36,15 +37,19 @@ public class ClientesController {
         return ResponseEntity.ok(clienteRepositorio.findAll());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<Cliente> get(@PathVariable("id") long id) {
         return ResponseEntity.of(clienteRepositorio.findById(id));
     }
 
     @PostMapping
-    public ResponseEntity<Cliente> post(@RequestBody ClienteDto clienteDto) {
-        Cliente cliente = criadorDeCliente.executar(clienteDto);
-        URI path = URI.create(API_PATH + "/" + cliente.getId());
-        return ResponseEntity.created(path).build();
+    public ResponseEntity<?> post(@RequestBody ClienteDto clienteDto) {
+        try {
+            Cliente cliente = criadorDeCliente.executar(clienteDto);
+            URI path = URI.create(API_PATH + "/" + cliente.getId());
+            return ResponseEntity.created(path).build();
+        } catch (ExcecaoDeAplicacao e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }

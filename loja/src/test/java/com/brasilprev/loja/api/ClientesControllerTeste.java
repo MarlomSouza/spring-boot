@@ -66,7 +66,7 @@ public class ClientesControllerTeste {
         when(cliente.getId()).thenReturn(clienteId);
         when(criadorDeCliente.executar(clienteDto)).thenReturn(cliente);
 
-        ResponseEntity<Cliente> response = clientesController.post(clienteDto);
+        ResponseEntity<?> response = clientesController.post(clienteDto);
 
         verify(criadorDeCliente).executar(clienteDto);
         assertEquals(localizacaoClienteCriado, response.getHeaders().getLocation().getPath());

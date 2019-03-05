@@ -45,7 +45,7 @@ public class ProdutosControllerTeste {
         when(criarProdutos.executar(produtoDto)).thenReturn(produto);
         when(produto.getId()).thenReturn(produtoId);
 
-        ResponseEntity<Produto> response = produtosController.post(produtoDto);
+        ResponseEntity<?> response = produtosController.post(produtoDto);
 
         assertEquals(localizacaoCriado, response.getHeaders().getLocation().getPath());
         assertEquals(HttpStatus.CREATED, response.getStatusCode());

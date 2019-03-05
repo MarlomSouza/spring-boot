@@ -3,6 +3,7 @@ package com.brasilprev.loja.api.controller;
 import java.net.URI;
 import java.util.List;
 
+import com.brasilprev.loja.aplicacao.ExcecaoDeAplicacao;
 import com.brasilprev.loja.aplicacao.produtos.CategoriaDto;
 import com.brasilprev.loja.aplicacao.produtos.CriadorDeCategoria;
 import com.brasilprev.loja.dominio.entidade.produtos.Categoria;
@@ -33,9 +34,13 @@ public class CategoriasController {
 
     @PostMapping
     public ResponseEntity<?> post(@RequestBody CategoriaDto categoriaDto) {
-        Categoria categoria = criadorDeCategoria.executar(categoriaDto);
-        URI path = URI.create(API_CATEGORIAS + "/" + categoria.getId());
-        return ResponseEntity.created(path).build();
+        try {
+            Categoria categoria = criadorDeCategoria.executar(categoriaDto);
+            URI path = URI.create(API_CATEGORIAS + "/" + categoria.getId());
+            return ResponseEntity.created(path).build();
+        } catch (ExcecaoDeAplicacao e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @GetMapping
@@ -43,7 +48,7 @@ public class CategoriasController {
         return ResponseEntity.ok(categoriaRepositorio.findAll());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<Categoria> get(@PathVariable long id) {
         return ResponseEntity.of(categoriaRepositorio.findById(id));
     }

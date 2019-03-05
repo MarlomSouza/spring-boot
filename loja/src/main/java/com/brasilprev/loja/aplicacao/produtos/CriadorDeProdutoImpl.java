@@ -3,6 +3,7 @@ package com.brasilprev.loja.aplicacao.produtos;
 import com.brasilprev.loja.aplicacao.ExcecaoDeAplicacao;
 import com.brasilprev.loja.dominio.entidade.produtos.Categoria;
 import com.brasilprev.loja.dominio.entidade.produtos.Produto;
+import com.brasilprev.loja.dominio.excecao.ExcecaoDeDominio;
 import com.brasilprev.loja.repositorio.CategoriaRepositorio;
 import com.brasilprev.loja.repositorio.ProdutoRepositorio;
 
@@ -23,12 +24,16 @@ public class CriadorDeProdutoImpl implements CriadorDeProduto {
 
     @Override
     public Produto executar(ProdutoDto produtoDto) {
-        Categoria categoria = categoriaRepositorio.findById(produtoDto.categoriaId)
-                .orElseThrow(() -> new ExcecaoDeAplicacao("Categoria não foi encontrada"));
+        try {
+            Categoria categoria = categoriaRepositorio.findById(produtoDto.categoriaId)
+                    .orElseThrow(() -> new ExcecaoDeAplicacao("Categoria não foi encontrada"));
 
-        Produto produto = mapearProduto(produtoDto, categoria);
-        produtoRepositorio.save(produto);
-        return produto;
+            Produto produto = mapearProduto(produtoDto, categoria);
+            produtoRepositorio.save(produto);
+            return produto;
+        } catch (ExcecaoDeDominio e) {
+            throw new ExcecaoDeAplicacao(e.getMessage());
+        }
     }
 
     private static Produto mapearProduto(ProdutoDto produtoDto, Categoria categoria) {
