@@ -13,6 +13,7 @@ import java.util.Optional;
 
 import com.brasilprev.loja.api.controller.PedidosController;
 import com.brasilprev.loja.aplicacao.compras.CriadorDePedido;
+import com.brasilprev.loja.aplicacao.compras.FecharPedido;
 import com.brasilprev.loja.aplicacao.compras.PedidoDto;
 import com.brasilprev.loja.dominio.entidade.compras.Pedido;
 import com.brasilprev.loja.repositorio.PedidoRepositorio;
@@ -31,12 +32,14 @@ public class PedidosControllerTeste {
     private CriadorDePedido criadorDePedido;
     private PedidosController pedidosController;
     private Pedido pedido;
+    private FecharPedido fecharPedido;
 
     @Before
     public void setUp() {
         pedidoRepositorio = mock(PedidoRepositorio.class);
         criadorDePedido = mock(CriadorDePedido.class);
-        pedidosController = new PedidosController(pedidoRepositorio, criadorDePedido);
+        fecharPedido = mock(FecharPedido.class);
+        pedidosController = new PedidosController(pedidoRepositorio, criadorDePedido, fecharPedido);
         pedido = mock(Pedido.class);
     }
 
@@ -94,6 +97,16 @@ public class PedidosControllerTeste {
         ResponseEntity<Pedido> response = pedidosController.put(pedidoId, pedidoDto);
 
         verify(criadorDePedido).executar(pedidoDto);
+        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+    }
+
+    @Test
+    public void deve_fechar_um_pedido() {
+        final long pedidoId = 2;
+
+        ResponseEntity<Pedido> response = pedidosController.put(pedidoId);
+
+        verify(fecharPedido).executar(pedidoId);
         assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }
 

@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(ClientesController.API_PATH)
 public class ClientesController {
 
-    static final String API_PATH = "api/clientes/";
+    static final String API_PATH = "api/clientes";
     private ClienteRepositorio clienteRepositorio;
     private CriadorDeCliente criadorDeCliente;
 
@@ -36,7 +36,7 @@ public class ClientesController {
         return ResponseEntity.ok(clienteRepositorio.findAll());
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Cliente> get(@PathVariable("id") long id) {
         return ResponseEntity.of(clienteRepositorio.findById(id));
     }
@@ -44,7 +44,7 @@ public class ClientesController {
     @PostMapping
     public ResponseEntity<Cliente> post(@RequestBody ClienteDto clienteDto) {
         Cliente cliente = criadorDeCliente.executar(clienteDto);
-        URI path = URI.create(API_PATH + cliente.getId());
+        URI path = URI.create(API_PATH + "/" + cliente.getId());
         return ResponseEntity.created(path).build();
     }
 }

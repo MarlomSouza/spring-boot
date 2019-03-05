@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(ProdutosController.API_PATH)
 public class ProdutosController {
 
-    static final String API_PATH = "api/produtos/";
+    static final String API_PATH = "api/produtos";
     private CriadorDeProduto criadorDeProduto;
     private ProdutoRepositorio produtoRepositorio;
 
@@ -34,7 +34,7 @@ public class ProdutosController {
     @PostMapping
     public ResponseEntity<Produto> post(@RequestBody ProdutoDto produtoDto) {
         Produto produto = criadorDeProduto.executar(produtoDto);
-        URI path = URI.create(API_PATH + produto.getId());
+        URI path = URI.create(API_PATH + "/" + produto.getId());
         return ResponseEntity.created(path).build();
     }
 
@@ -43,7 +43,7 @@ public class ProdutosController {
         return ResponseEntity.ok(produtoRepositorio.findAll());
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Produto> get(@PathVariable("id") long id) {
         return ResponseEntity.of(produtoRepositorio.findById(id));
     }
