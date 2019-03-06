@@ -3,6 +3,7 @@ package com.brasilprev.loja.api;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -10,10 +11,13 @@ import java.util.List;
 import java.util.Optional;
 
 import com.brasilprev.loja.api.controller.CategoriasController;
+import com.brasilprev.loja.aplicacao.ExcecaoDeAplicacao;
 import com.brasilprev.loja.aplicacao.produtos.CategoriaDto;
 import com.brasilprev.loja.aplicacao.produtos.CriadorDeCategoria;
+import com.brasilprev.loja.aplicacao.produtos.ExcluirCategoria;
 import com.brasilprev.loja.dominio.entidade.produtos.Categoria;
 import com.brasilprev.loja.repositorio.CategoriaRepositorio;
+import com.brasilprev.loja.repositorio.ProdutoRepositorio;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -28,12 +32,14 @@ public class CategoriasControllerTeste {
     private CategoriasController categoriasController;
     private CategoriaRepositorio categoriaRepositorio;
     private CriadorDeCategoria criadorDeCategoria;
+    private ExcluirCategoria excluirCategoria;
 
     @Before
     public void setUp() {
         criadorDeCategoria = mock(CriadorDeCategoria.class);
         categoriaRepositorio = mock(CategoriaRepositorio.class);
-        categoriasController = new CategoriasController(categoriaRepositorio, criadorDeCategoria);
+        excluirCategoria = mock(ExcluirCategoria.class);
+        categoriasController = new CategoriasController(categoriaRepositorio, criadorDeCategoria, excluirCategoria);
     }
 
     @Test
@@ -79,6 +85,26 @@ public class CategoriasControllerTeste {
 
         assertNull(response.getBody());
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    @Test
+    public void deve_excluir_um_categoria() {
+        final long categoriaId = 3;
+
+        ResponseEntity<?> response = categoriasController.delete(categoriaId);
+
+        verify(excluirCategoria).executar(categoriaId);
+        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+    }
+
+    @Test
+    public void nao_deve_excluir_uma_categoria_em_uso() {
+        final long categoriaId = 3;
+        when(excluirCategoria.executar(categoriaId)).thenThrow(ExcecaoDeAplicacao.class);
+
+        ResponseEntity<?> response = categoriasController.delete(categoriaId);
+
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     }
 
 }
