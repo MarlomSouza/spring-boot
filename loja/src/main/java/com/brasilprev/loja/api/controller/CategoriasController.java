@@ -25,9 +25,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CategoriasController {
 
     static final String API_CATEGORIAS = "api/categorias";
-    private CriadorDeCategoria criadorDeCategoria;
-    private CategoriaRepositorio categoriaRepositorio;
-    private ExcluirCategoria excluirCategoria;
+    private final CriadorDeCategoria criadorDeCategoria;
+    private final CategoriaRepositorio categoriaRepositorio;
+    private final ExcluirCategoria excluirCategoria;
 
     @Autowired
     public CategoriasController(CategoriaRepositorio categoriaRepositorio, CriadorDeCategoria criadorDeCategoria,

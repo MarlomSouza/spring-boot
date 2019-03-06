@@ -25,9 +25,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PedidosController {
 
     static final String API_PATH = "api/pedidos";
-    private PedidoRepositorio pedidoRepositorio;
-    private CriadorDePedido criadorDePedido;
-    private FecharPedido fecharPedido;
+    private final PedidoRepositorio pedidoRepositorio;
+    private final CriadorDePedido criadorDePedido;
+    private final FecharPedido fecharPedido;
 
     @Autowired
     public PedidosController(PedidoRepositorio pedidoRepositorio, CriadorDePedido criadorDePedido,

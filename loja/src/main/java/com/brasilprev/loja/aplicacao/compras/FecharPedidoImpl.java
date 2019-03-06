@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class FecharPedidoImpl implements FecharPedido {
 
-    private PedidoRepositorio pedidoRepositorio;
+    private final PedidoRepositorio pedidoRepositorio;
 
     @Autowired
     public FecharPedidoImpl(PedidoRepositorio pedidoRepositorio) {

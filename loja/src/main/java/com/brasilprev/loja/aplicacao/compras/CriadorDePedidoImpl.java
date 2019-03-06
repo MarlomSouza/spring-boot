@@ -16,9 +16,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class CriadorDePedidoImpl implements CriadorDePedido {
 
-    private PedidoRepositorio pedidoRepositorio;
-    private ClienteRepositorio clienteRepositorio;
-    private ProdutoRepositorio produtoRepositorio;
+    private final PedidoRepositorio pedidoRepositorio;
+    private final ClienteRepositorio clienteRepositorio;
+    private final ProdutoRepositorio produtoRepositorio;
 
     @Autowired
     public CriadorDePedidoImpl(PedidoRepositorio pedidoRepositorio, ClienteRepositorio clienteRepositorio,

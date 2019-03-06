@@ -1,9 +1,6 @@
 package com.brasilprev.loja.aplicacao.produtos;
 
-import java.util.List;
-
 import com.brasilprev.loja.aplicacao.ExcecaoDeAplicacao;
-import com.brasilprev.loja.dominio.entidade.produtos.Produto;
 import com.brasilprev.loja.repositorio.CategoriaRepositorio;
 import com.brasilprev.loja.repositorio.ProdutoRepositorio;
 
@@ -13,8 +10,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class ExcluirCategoriaImpl implements ExcluirCategoria {
 
-    private CategoriaRepositorio categoriaRepositorio;
-    private ProdutoRepositorio produtoRepositorio;
+    private final CategoriaRepositorio categoriaRepositorio;
+    private final ProdutoRepositorio produtoRepositorio;
 
     @Autowired
     public ExcluirCategoriaImpl(CategoriaRepositorio categoriaRepositorio, ProdutoRepositorio produtoRepositorio) {

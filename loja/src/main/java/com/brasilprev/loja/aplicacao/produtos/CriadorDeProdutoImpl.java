@@ -13,8 +13,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class CriadorDeProdutoImpl implements CriadorDeProduto {
 
-    private ProdutoRepositorio produtoRepositorio;
-    private CategoriaRepositorio categoriaRepositorio;
+    private final ProdutoRepositorio produtoRepositorio;
+    private final CategoriaRepositorio categoriaRepositorio;
 
     @Autowired
     public CriadorDeProdutoImpl(ProdutoRepositorio produtoRepositorio, CategoriaRepositorio categoriaRepositorio) {

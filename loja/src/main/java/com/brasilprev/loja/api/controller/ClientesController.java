@@ -23,8 +23,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ClientesController {
 
     static final String API_PATH = "api/clientes";
-    private ClienteRepositorio clienteRepositorio;
-    private CriadorDeCliente criadorDeCliente;
+    private final ClienteRepositorio clienteRepositorio;
+    private final CriadorDeCliente criadorDeCliente;
 
     @Autowired
     public ClientesController(ClienteRepositorio clienteRepositorio, CriadorDeCliente criadorDeCliente) {

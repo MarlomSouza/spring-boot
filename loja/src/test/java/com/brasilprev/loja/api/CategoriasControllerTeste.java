@@ -17,7 +17,6 @@ import com.brasilprev.loja.aplicacao.produtos.CriadorDeCategoria;
 import com.brasilprev.loja.aplicacao.produtos.ExcluirCategoria;
 import com.brasilprev.loja.dominio.entidade.produtos.Categoria;
 import com.brasilprev.loja.repositorio.CategoriaRepositorio;
-import com.brasilprev.loja.repositorio.ProdutoRepositorio;
 
 import org.junit.Before;
 import org.junit.Test;
