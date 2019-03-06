@@ -9,21 +9,16 @@ import java.util.UUID;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.brasilprev.loja.dominio.entidade.Entidade;
 import com.brasilprev.loja.dominio.entidade.clientes.Cliente;
 import com.brasilprev.loja.dominio.excecao.ExcecaoDeDominio;
 
 @Entity
-public class Pedido {
+public class Pedido extends Entidade {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
     @OneToOne
     private Cliente cliente;
     private StatusPedido statusPedido;

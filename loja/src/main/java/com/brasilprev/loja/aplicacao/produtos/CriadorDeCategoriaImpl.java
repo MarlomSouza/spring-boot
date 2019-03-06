@@ -19,7 +19,7 @@ public class CriadorDeCategoriaImpl implements CriadorDeCategoria {
     }
 
     @Override
-    public Categoria executar(CategoriaDto categoriaDto) {
+    public Categoria executar(CategoriaDto categoriaDto) throws ExcecaoDeAplicacao {
         try {
             Categoria categoria = new Categoria(categoriaDto.nome);
             categoriaRepositorio.save(categoria);

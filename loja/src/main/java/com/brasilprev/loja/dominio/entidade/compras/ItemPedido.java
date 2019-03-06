@@ -3,20 +3,15 @@ package com.brasilprev.loja.dominio.entidade.compras;
 import java.math.BigDecimal;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import com.brasilprev.loja.dominio.entidade.Entidade;
 import com.brasilprev.loja.dominio.entidade.produtos.Produto;
 import com.brasilprev.loja.dominio.excecao.ExcecaoDeDominio;
 
 @Entity
-public class ItemPedido {
+public class ItemPedido extends Entidade {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
     @OneToOne
     private Produto produto;
     private int quantidade;
@@ -35,7 +30,7 @@ public class ItemPedido {
         this.subTotal = valor.multiply(new BigDecimal(quantidade));
     }
 
-    private void validar( Produto produto, int quantidade) {
+    private void validar(Produto produto, int quantidade) {
         ExcecaoDeDominio.Quando(produto == null, "Produto é inválido");
         ExcecaoDeDominio.Quando(quantidade <= 0, "Quantidade é inválida");
     }
@@ -54,6 +49,11 @@ public class ItemPedido {
 
     public BigDecimal getSubTotal() {
         return subTotal;
+    }
+
+    @Override
+    public long getId() {
+        return id;
     }
 
 }

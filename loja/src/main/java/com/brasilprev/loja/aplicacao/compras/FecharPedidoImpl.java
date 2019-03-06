@@ -19,7 +19,7 @@ public class FecharPedidoImpl implements FecharPedido {
     }
 
     @Override
-    public Pedido executar(Long pedidoId) {
+    public Pedido executar(Long pedidoId) throws ExcecaoDeAplicacao {
         try {
             Pedido pedido = pedidoRepositorio.findById(pedidoId)
                     .orElseThrow(() -> new ExcecaoDeAplicacao("Pedido não encontrado"));

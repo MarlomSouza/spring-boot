@@ -23,7 +23,7 @@ public class CriadorDeProdutoImpl implements CriadorDeProduto {
     }
 
     @Override
-    public Produto executar(ProdutoDto produtoDto) {
+    public Produto executar(ProdutoDto produtoDto) throws ExcecaoDeAplicacao {
         try {
             Categoria categoria = categoriaRepositorio.findById(produtoDto.categoriaId)
                     .orElseThrow(() -> new ExcecaoDeAplicacao("Categoria não foi encontrada"));

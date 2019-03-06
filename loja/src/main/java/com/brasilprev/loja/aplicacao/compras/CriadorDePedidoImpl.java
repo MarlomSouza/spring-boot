@@ -29,9 +29,8 @@ public class CriadorDePedidoImpl implements CriadorDePedido {
     }
 
     @Override
-    public Pedido executar(PedidoDto pedidoDto) {
+    public Pedido executar(PedidoDto pedidoDto) throws ExcecaoDeAplicacao {
         try {
-
             Pedido pedido = obterPedido(pedidoDto);
             adicionarItemPedido(pedido, pedidoDto.itensPedido);
             pedidoRepositorio.save(pedido);

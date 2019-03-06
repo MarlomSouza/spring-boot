@@ -3,19 +3,14 @@ package com.brasilprev.loja.dominio.entidade.produtos;
 import java.math.BigDecimal;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import com.brasilprev.loja.dominio.entidade.Entidade;
 import com.brasilprev.loja.dominio.excecao.ExcecaoDeDominio;
 
 @Entity
-public class Produto {
+public class Produto extends Entidade {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
     private String nome;
     private String descricao;
     private String foto;
@@ -24,7 +19,7 @@ public class Produto {
     @OneToOne
     private Categoria categoria;
 
-    private Produto(){
+    private Produto() {
     }
 
     public Produto(String nome, String descricao, String foto, BigDecimal preco, int quantidade, Categoria categoria) {

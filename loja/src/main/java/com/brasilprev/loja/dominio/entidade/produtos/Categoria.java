@@ -1,18 +1,13 @@
 package com.brasilprev.loja.dominio.entidade.produtos;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
+import com.brasilprev.loja.dominio.entidade.Entidade;
 import com.brasilprev.loja.dominio.excecao.ExcecaoDeDominio;
 
 @Entity
-public class Categoria {
+public class Categoria extends Entidade {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
     private String nome;
 
     private Categoria() {
